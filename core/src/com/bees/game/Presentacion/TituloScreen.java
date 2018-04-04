@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.bees.game.MainGame;
 
 /**
  * @author Edwin César Condori Vilcapuma
@@ -29,7 +30,7 @@ public class TituloScreen extends BaseScreen{
     ImageButton btnplay;
     private Music backgroundMusic;
 
-    public TituloScreen(final MenuScreen.MainGame game) {
+    public TituloScreen(final MainGame game) {
         super(game);
         stage = new Stage(new FitViewport(640, 360));
         fondo_pantalla= new Image(game.getManager().get("recursos_imagenes/intro.jpg", Texture.class));
@@ -60,6 +61,7 @@ public class TituloScreen extends BaseScreen{
         stage.addActor(btnplay);
 
     }
+
 
     /**
      *

@@ -20,7 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.bees.game.Entidad.EIngrediente;
 import com.bees.game.Entidad.ELugarPrep;
-
+import com.bees.game.MainGame;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
@@ -68,7 +68,7 @@ public class GameScreen extends BaseScreen{
     //Array para ingredientes
     //ArrayList<Integer> ingredientesArray = new ArrayList<Integer>();
 
-    public GameScreen(MenuScreen.MainGame game, String ingredientes) {
+    public GameScreen(MainGame game, String ingredientes) {
         super(game);
         //necesario instanciar
         this.ingredientes = ingredientes;

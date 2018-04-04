@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-
+import com.bees.game.MainGame;
 /**
  * @author Edwin César Condori Vilcapuma
  *
@@ -23,7 +23,7 @@ public class LoadingScreen extends BaseScreen{
     /** This is the label that we use to display some text on the screen. */
     private Label loading;
 
-    public LoadingScreen(MenuScreen.MainGame game) {
+    public LoadingScreen(MainGame game) {
         super(game);
         // Set up the stage and the skin. See GameOverScreen for more comments on this.
         stage = new Stage(new FitViewport(640, 360));

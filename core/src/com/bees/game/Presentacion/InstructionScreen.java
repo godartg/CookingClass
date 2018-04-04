@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.bees.game.MainGame;
 
 /**
  * @author Edwin César Condori Vilcapuma
@@ -27,7 +28,7 @@ public class InstructionScreen extends BaseScreen{
     private Image fondo_pantalla;
     private TextButton btnsiguiente;
 
-    public InstructionScreen(final MenuScreen.MainGame game) {
+    public InstructionScreen(final MainGame game) {
         super(game);
         stage = new Stage(new FitViewport(640, 360));
 

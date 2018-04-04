@@ -1,6 +1,7 @@
 package com.bees.game.Presentacion;
 
 import com.badlogic.gdx.Screen;
+import com.bees.game.MainGame;
 
 /**
  * @author Edwin César Condori Vilcapuma
@@ -9,9 +10,9 @@ import com.badlogic.gdx.Screen;
  */
 
 public abstract class BaseScreen implements Screen {
-    protected MenuScreen.MainGame game;
+    protected MainGame game;
 
-    public BaseScreen(MenuScreen.MainGame game) {
+    public BaseScreen(MainGame game) {
         this.game = game;
     }
 

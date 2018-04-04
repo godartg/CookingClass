@@ -1,0 +1,4 @@
+1,papa,recursos_imagenes/potato.png,
+2,mantequilla,recursos_imagenes/butter.png,
+3,leche,recursos_imagenes/milk.png,
+4,sal,recurso_imagenes/sal.png,
