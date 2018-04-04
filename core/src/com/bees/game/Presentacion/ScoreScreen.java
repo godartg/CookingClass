@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.bees.game.MainGame;
 
 /**
  * @author Edwin César Condori Vilcapuma
@@ -35,7 +34,7 @@ public class /**
     private Label lbltitulo,lblScore;
     TextButton btnRegresarMenu;
 
-    public ScoreScreen(final MainGame game, int score) {
+    public ScoreScreen(final MenuScreen.MainGame game, int score) {
         super(game);
         stage = new Stage(new FitViewport(640, 360));
         fondo_pantalla= new Image(game.getManager().get("recursos_imagenes/puntuacion.png", Texture.class));

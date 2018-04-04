@@ -18,7 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.bees.game.MainGame;
 import com.bees.game.Entidad.EIngrediente;
 import com.bees.game.Entidad.ELugarPrep;
 
@@ -69,7 +68,7 @@ public class GameScreen extends BaseScreen{
     //Array para ingredientes
     //ArrayList<Integer> ingredientesArray = new ArrayList<Integer>();
 
-    public GameScreen(MainGame game, String ingredientes) {
+    public GameScreen(MenuScreen.MainGame game, String ingredientes) {
         super(game);
         //necesario instanciar
         this.ingredientes = ingredientes;

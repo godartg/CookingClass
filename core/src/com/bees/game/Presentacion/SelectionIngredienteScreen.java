@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.bees.game.MainGame;
 
 /**
  * @author Edwin César Condori Vilcapuma
@@ -40,7 +39,7 @@ public class SelectionIngredienteScreen extends BaseScreen{
     //private ArrayList<Integer> ingredientesArray = new ArrayList<Integer>();
     ExitDialog exitDialog;
 
-    public SelectionIngredienteScreen(final MainGame game) {
+    public SelectionIngredienteScreen(final MenuScreen.MainGame game) {
         super(game);
         stage = new Stage(new FitViewport(640, 360));
 
