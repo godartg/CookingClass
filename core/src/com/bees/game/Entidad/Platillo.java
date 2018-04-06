@@ -1,5 +1,7 @@
 package com.bees.game.Entidad;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
+
 import java.util.ArrayList;
 
 /**
@@ -8,7 +10,7 @@ import java.util.ArrayList;
  * Created by Edwin César Condori Vilcapuma on 20/03/2018.
  */
 
-public class Platillo {
+public class Platillo extends Actor {
     private int id;
     private String nombre;
     private String url;
@@ -39,6 +41,8 @@ public class Platillo {
     }
 
     public ArrayList<Ingrediente> getIngredientes() {
+        int ejempli=id;
+
         return ingredientes;
     }
 

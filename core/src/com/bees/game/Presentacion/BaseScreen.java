@@ -4,6 +4,7 @@ import com.badlogic.gdx.Screen;
 import com.bees.game.MainGame;
 
 /**
+ * Clase Abstracta que permite la creación multiples pantallas
  * @author Edwin César Condori Vilcapuma
  *
  * Created by Edwin César Condori Vilcapuma on 20/03/2018.

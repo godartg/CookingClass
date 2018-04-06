@@ -23,7 +23,6 @@ import com.bees.game.MainGame;
 public class InstructionScreen extends BaseScreen{
     private Stage stage;
     ExitDialog exitDialog;
-    //Agregar imagen de fondo de la pantalla
     private Skin skin;
     private Image fondo_pantalla;
     private TextButton btnsiguiente;
@@ -44,7 +43,6 @@ public class InstructionScreen extends BaseScreen{
 
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                // Take me to the game screen!
                 tutorial(contadortutorial);
                 contadortutorial++;
             }

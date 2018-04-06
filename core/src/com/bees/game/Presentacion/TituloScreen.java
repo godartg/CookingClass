@@ -17,8 +17,8 @@ import com.bees.game.MainGame;
 
 /**
  * @author Edwin César Condori Vilcapuma
- *
- * Created by Edwin César Condori Vilcapuma on 20/03/2018.
+ * @author Mauricio García Silva
+ * Creado por Edwin César Condori Vilcapuma y Mauricio García Silva  20/03/2018.
  */
 
 public class TituloScreen extends BaseScreen{
@@ -88,10 +88,6 @@ public class TituloScreen extends BaseScreen{
 
     @Override
     public void hide() {
-        //
-        // When the screen is no more visible, you have to remember to unset the input processor.
-        // Otherwise, input might act weird, because even if you aren't using this screen, you are
-        // still using the stage for handling input.
         Gdx.input.setInputProcessor(null);
     }
 

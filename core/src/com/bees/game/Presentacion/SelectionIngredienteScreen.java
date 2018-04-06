@@ -19,8 +19,8 @@ import com.bees.game.MainGame;
 
 /**
  * @author Edwin César Condori Vilcapuma
- *
- * Created by Edwin César Condori Vilcapuma on 20/03/2018.
+ * @author Mauricio García Silva
+ * Creado por Edwin César Condori Vilcapuma y Mauricio García Silva  20/03/2018.
  */
 
 public class SelectionIngredienteScreen extends BaseScreen{

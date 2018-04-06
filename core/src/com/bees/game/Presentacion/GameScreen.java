@@ -31,12 +31,8 @@ import java.util.ListIterator;
  */
 
 public class GameScreen extends BaseScreen{
-    /** The stage where all the buttons are added. */
-    //necesario declarar
     private Stage stage;
 
-    /** World instance for Box2D engine. */
-    //private World world;
     //Musica
     private Music backgroundMusic;
     private Sound jump;
@@ -45,7 +41,6 @@ public class GameScreen extends BaseScreen{
     private Label lblTitulo, lblLugarPrep;
     private Skin skin;
 
-    //private Vector<Vector<String>> datos= new Vector();
     EIngrediente leche, papa, mantequilla,sal;
     ELugarPrep lugarPrep;
     DragAndDrop dragAndDrop = new DragAndDrop();
@@ -57,29 +52,21 @@ public class GameScreen extends BaseScreen{
     float dy;
     //Cuadro de dialogo
     ExitDialog exitDialog;
-    //Lugar de Preparación
     private int contLugarPrep;
     Texture lugarTexture;
-    //Array de lugar de preparacion
     ArrayList<String> lugarArray = new ArrayList<String>();
     ArrayList<Texture> pathArray = new ArrayList<Texture>();
     ListIterator<String> llugar;
     ListIterator<Texture> lpath;
-    //Array para ingredientes
-    //ArrayList<Integer> ingredientesArray = new ArrayList<Integer>();
 
     public GameScreen(MainGame game, String ingredientes) {
         super(game);
-        //necesario instanciar
         this.ingredientes = ingredientes;
         stage = new Stage(new FitViewport(640, 360));
-//        stage.setDebugAll(true);
         position= new Vector3(stage.getCamera().position);
-        //world= new World(new Vector2(0,0),true);
         skin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
         Label.LabelStyle stle_label= skin.get("title",Label.LabelStyle.class);
 
-        //Label.LabelStyle stle_label1= skin.get(Label.LabelStyle.class);
         ImageButton.ImageButtonStyle stle_btn= skin.get("left", ImageButton.ImageButtonStyle.class);
         ImageButton.ImageButtonStyle stle_btn1= skin.get("right", ImageButton.ImageButtonStyle.class);
         //array lugar de preparación
@@ -92,13 +79,11 @@ public class GameScreen extends BaseScreen{
         pathArray.add((Texture) game.getManager().get("recursos_imagenes/posillo.png"));
         pathArray.add((Texture) game.getManager().get("recursos_imagenes/sarten.png"));
         pathArray.add((Texture) game.getManager().get("recursos_imagenes/tabla.png"));
-        //Labels
         llugar= lugarArray.listIterator();
         lpath= pathArray.listIterator();
 
         lblTitulo = new Label("Ingredientes", stle_label);
         lblLugarPrep = new Label("Olla", stle_label);
-        //Botones
         btnderecha= new ImageButton(stle_btn);
         btnizquierda= new ImageButton(stle_btn1);
 
@@ -106,14 +91,10 @@ public class GameScreen extends BaseScreen{
         btnderecha.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                // Take me to the game screen!
                 if(llugar.hasPrevious()){
-                    //btnderecha.setLayoutEnabled(true);
                     lblLugarPrep.setText(llugar.previous());
                     lugarPrep.setTexture(lpath.previous());
-                    //btnizquierda.setLayoutEnabled(true);
                 }else{
-                    //btnderecha.setLayoutEnabled(false);
                 }
 
             }
@@ -133,7 +114,7 @@ public class GameScreen extends BaseScreen{
                 }
             }
         });
-        //Tamaño y Posicionamiento
+
         lblTitulo.setSize(90,60);
         lblTitulo.setPosition(120,300);
         lblLugarPrep.setSize(90,60);
@@ -142,18 +123,13 @@ public class GameScreen extends BaseScreen{
         btnderecha.setPosition(355,290);
         btnizquierda.setSize(49,49);
         btnizquierda.setPosition(570,290);
-
         backgroundMusic=game.getManager().get("recursos_sonidos/Bolero.mp3");
-
 
 
     }
 
     @Override
     public void show() {
-        //EPartida ePartida= new EPartida();
-        //PartidaMetodos partida= new PartidaMetodos();
-        //IngredienteMetodos ingredientes= new IngredienteMetodos();
         lugarTexture = game.getManager().get("recursos_imagenes/olla.png");//
         lugarPrep = new ELugarPrep(lugarTexture,370,50);
         stage.addActor(lugarPrep);
@@ -169,16 +145,17 @@ public class GameScreen extends BaseScreen{
         papa.setestadoIngrediente(false);
         mantequilla.setestadoIngrediente(false);
         sal.setestadoIngrediente(false);
+
         leche.addListener(new InputListener() {
-            final float h = 75 / 2;
+            final float altura = 75 / 2;
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 touchDown_x = x;
-                touchDown_y = h - y;
+                touchDown_y = altura - y;
                 return true;
             }
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 dx = leche.getX() - touchDown_x;
-                dy = leche.getY() - h  + touchDown_y;
+                dy = leche.getY() - altura  + touchDown_y;
                 leche.setPosition(x + dx, y + dy);
             }
 
@@ -188,20 +165,20 @@ public class GameScreen extends BaseScreen{
                     leche.setestadoIngrediente(true);
                 }else{
                     leche.setPosition(30,230);
-                    //System.out.println("X:"+x+";"+"Y"+y);
                 }
             }
         });
+
         papa.addListener(new InputListener() {
-            final float h = 75 / 2;
+            final float altura = 75 / 2;
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 touchDown_x = x;
-                touchDown_y = h - y;
+                touchDown_y = altura - y;
                 return true;
             }
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 dx = papa.getX() - touchDown_x;
-                dy = papa.getY() -h + touchDown_y;
+                dy = papa.getY() -altura + touchDown_y;
                 papa.setPosition(x + dx, y + dy);
             }
 
@@ -216,15 +193,15 @@ public class GameScreen extends BaseScreen{
             }
         });
         mantequilla.addListener(new InputListener() {
-            final float h = 75 / 2;
+            final float altura = 75 / 2;
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 touchDown_x = x;
-                touchDown_y = h - y;
+                touchDown_y = altura - y;
                 return true;
             }
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 dx = mantequilla.getX() - touchDown_x;
-                dy = mantequilla.getY() -h + touchDown_y;
+                dy = mantequilla.getY() -altura + touchDown_y;
                 mantequilla.setPosition(x + dx, y + dy);
             }
 
@@ -240,15 +217,15 @@ public class GameScreen extends BaseScreen{
             }
         });
         sal.addListener(new InputListener() {
-            final float h = 75 / 2;
+            final float altura = 75 / 2;
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 touchDown_x = x;
-                touchDown_y = h - y;
+                touchDown_y = altura - y;
                 return true;
             }
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 dx = sal.getX() - touchDown_x;
-                dy = sal.getY() -h + touchDown_y;
+                dy = sal.getY() -altura + touchDown_y;
                 sal.setPosition(x + dx, y + dy);
             }
 
@@ -263,6 +240,7 @@ public class GameScreen extends BaseScreen{
                 //
             }
         });
+
         boolean lecheexist=false,mantequillaexist=false,papaexist=false,salexist=false;
         for (String dato : ingredientes.split(",")){
             if(dato.equals("1")){
@@ -317,23 +295,18 @@ public class GameScreen extends BaseScreen{
         btnCocinar.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                // Take me to the game screen!
                 int puntaje=0;
                 if(leche.getestadoIngrediente()){
                     puntaje+=5;
-                    //Gdx.app.log("checked","1");
                 }
                 if (mantequilla.getestadoIngrediente()){
                     puntaje+=5;
-                    //Gdx.app.log("checked","2");
                 }
                 if (papa.getestadoIngrediente()){
                     puntaje+=5;
-                    //Gdx.app.log("checked","3");
                 }
                 if (sal.getestadoIngrediente()){
                     puntaje+=5;
-                    //Gdx.app.log("checked","4");
                 }
 
                 game.evaluar(puntaje);
@@ -342,7 +315,6 @@ public class GameScreen extends BaseScreen{
             }
         });
 
-        //stage.setDebugAll(true);
         backgroundMusic.setVolume(1);
         backgroundMusic.play();
         stage.addActor(lblTitulo);
@@ -356,25 +328,19 @@ public class GameScreen extends BaseScreen{
     @Override
     public void hide() {
         stage.clear();
-        //IngredienteList.clear();
         Gdx.input.setInputProcessor(null);
     }
 
     @Override
     public void dispose() {
-        // Dispose assets.
-
         stage.dispose();
-
     }
 
     @Override
     public void render(float delta) {
-        //Gdx.gl.glClearColor(0.2f, 0.3f, 0.5f, 1f);
         Gdx.gl.glClearColor(182/255f,222/255f,232/255f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();
-
         stage.draw();
     }
 }

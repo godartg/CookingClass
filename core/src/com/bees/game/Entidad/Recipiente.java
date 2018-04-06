@@ -1,12 +1,14 @@
 package com.bees.game.Entidad;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
+
 /**
  * @author Edwin César Condori Vilcapuma
  *
  * Created by Edwin César Condori Vilcapuma on 20/03/2018.
  */
 
-public class Recipiente {
+public class Recipiente extends Actor {
     private int id;
     private String nombre;
     private String imagen;
