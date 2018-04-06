@@ -35,7 +35,6 @@ public class GameScreen extends BaseScreen{
 
     //Musica
     private Music backgroundMusic;
-    private Sound jump;
     private Vector3 position;
     String ingredientes;
     private Label lblTitulo, lblLugarPrep;
@@ -43,16 +42,11 @@ public class GameScreen extends BaseScreen{
 
     EIngrediente leche, papa, mantequilla,sal;
     ELugarPrep lugarPrep;
-    DragAndDrop dragAndDrop = new DragAndDrop();
     ImageButton btnizquierda, btnderecha, btnLugarPrep;
     private TextButton btnCocinar;
-    float touchDown_x;
-    float touchDown_y;
-    float dx;
-    float dy;
+
     //Cuadro de dialogo
     ExitDialog exitDialog;
-    private int contLugarPrep;
     Texture lugarTexture;
     ArrayList<String> lugarArray = new ArrayList<String>();
     ArrayList<Texture> pathArray = new ArrayList<Texture>();
@@ -146,100 +140,10 @@ public class GameScreen extends BaseScreen{
         mantequilla.setestadoIngrediente(false);
         sal.setestadoIngrediente(false);
 
-        leche.addListener(new InputListener() {
-            final float altura = 75 / 2;
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                touchDown_x = x;
-                touchDown_y = altura - y;
-                return true;
-            }
-            public void touchDragged(InputEvent event, float x, float y, int pointer) {
-                dx = leche.getX() - touchDown_x;
-                dy = leche.getY() - altura  + touchDown_y;
-                leche.setPosition(x + dx, y + dy);
-            }
-
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                if ((leche.getX()>=lugarPrep.getX()&&leche.getX()<=(lugarPrep.getX()+lugarPrep.getWidth()))&&(leche.getY()>=lugarPrep.getY()&&leche.getY()<=(lugarPrep.getY()+lugarPrep.getHeight()))){
-                    leche.setVisible(false);
-                    leche.setestadoIngrediente(true);
-                }else{
-                    leche.setPosition(30,230);
-                }
-            }
-        });
-
-        papa.addListener(new InputListener() {
-            final float altura = 75 / 2;
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                touchDown_x = x;
-                touchDown_y = altura - y;
-                return true;
-            }
-            public void touchDragged(InputEvent event, float x, float y, int pointer) {
-                dx = papa.getX() - touchDown_x;
-                dy = papa.getY() -altura + touchDown_y;
-                papa.setPosition(x + dx, y + dy);
-            }
-
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                if ((papa.getX()>=lugarPrep.getX()&&papa.getX()<=(lugarPrep.getX()+lugarPrep.getWidth()))&&(papa.getY()>=lugarPrep.getY()&&papa.getY()<=(lugarPrep.getY()+lugarPrep.getHeight()))){
-                    papa.setVisible(false);
-                    papa.setestadoIngrediente(true);
-                }else{
-                    papa.setPosition(110,230);
-                    //System.out.println("X:"+x+";"+"Y"+y);
-                }
-            }
-        });
-        mantequilla.addListener(new InputListener() {
-            final float altura = 75 / 2;
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                touchDown_x = x;
-                touchDown_y = altura - y;
-                return true;
-            }
-            public void touchDragged(InputEvent event, float x, float y, int pointer) {
-                dx = mantequilla.getX() - touchDown_x;
-                dy = mantequilla.getY() -altura + touchDown_y;
-                mantequilla.setPosition(x + dx, y + dy);
-            }
-
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                if ((mantequilla.getX()>=lugarPrep.getX()&&mantequilla.getX()<=(lugarPrep.getX()+lugarPrep.getWidth()))&&(mantequilla.getY()>=lugarPrep.getY()&&mantequilla.getY()<=(lugarPrep.getY()+lugarPrep.getHeight()))){
-                    mantequilla.setVisible(false);
-                    mantequilla.setestadoIngrediente(true);
-                }else{
-                    mantequilla.setPosition(190,230);
-                    //System.out.println("X:"+x+";"+"Y"+y);
-                }
-                //
-            }
-        });
-        sal.addListener(new InputListener() {
-            final float altura = 75 / 2;
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                touchDown_x = x;
-                touchDown_y = altura - y;
-                return true;
-            }
-            public void touchDragged(InputEvent event, float x, float y, int pointer) {
-                dx = sal.getX() - touchDown_x;
-                dy = sal.getY() -altura + touchDown_y;
-                sal.setPosition(x + dx, y + dy);
-            }
-
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                if ((sal.getX()>=lugarPrep.getX()&&sal.getX()<=(lugarPrep.getX()+lugarPrep.getWidth()))&&(sal.getY()>=lugarPrep.getY()&&sal.getY()<=(lugarPrep.getY()+lugarPrep.getHeight()))){
-                    sal.setVisible(false);
-                    sal.setestadoIngrediente(true);
-                }else{
-                    sal.setPosition(30,150);
-                    //System.out.println("X:"+x+";"+"Y"+y);
-                }
-                //
-            }
-        });
+        leche.addListener(new EIngrediente.AgregarListener(leche, lugarPrep));
+        papa.addListener(new EIngrediente.AgregarListener(papa, lugarPrep));
+        mantequilla.addListener(new EIngrediente.AgregarListener(mantequilla, lugarPrep));
+        sal.addListener(new EIngrediente.AgregarListener(sal, lugarPrep));
 
         boolean lecheexist=false,mantequillaexist=false,papaexist=false,salexist=false;
         for (String dato : ingredientes.split(",")){
@@ -325,6 +229,8 @@ public class GameScreen extends BaseScreen{
         Gdx.input.setInputProcessor(stage);
     }
 
+
+
     @Override
     public void hide() {
         stage.clear();
@@ -343,4 +249,5 @@ public class GameScreen extends BaseScreen{
         stage.act();
         stage.draw();
     }
+
 }
