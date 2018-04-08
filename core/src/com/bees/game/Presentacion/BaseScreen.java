@@ -1,53 +1,59 @@
 package com.bees.game.Presentacion;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.bees.game.MainGame;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 /**
- * Clase Abstracta que permite la creación multiples pantallas
+ * Clase Abstracta que permite la correcta gestión de las pantallas, tambien permite darle un tamaño determinado
  * @author Edwin César Condori Vilcapuma
- *
+ * @see <a href="http://www.pixnbgames.com/blog/libgdx/how-to-manage-screens-in-libgdx/">How to manage screens in LibGDX</a>
  * Created by Edwin César Condori Vilcapuma on 20/03/2018.
  */
 
-public abstract class BaseScreen implements Screen {
-    protected MainGame game;
+public abstract class BaseScreen extends Stage implements Screen {
 
-    public BaseScreen(MainGame game) {
-        this.game = game;
+    public BaseScreen() {
+        super(new StretchViewport(640, 360, new OrthographicCamera()));
     }
-
+    //Subclases deben cargar los actores en este método
+    public abstract void buildStage();
     @Override
     public void show() {
-        // This method is invoked when a screen is displayed.
+        //Permite que la pantalla actual se visualice
+        Gdx.input.setInputProcessor(this);
     }
 
     @Override
     public void render(float delta) {
-        // This method is invoked when a screen has to be rendered in a frame.
-        // delta is the amount of seconds (order of 0.01 or so) between this and last frame.
+        //Limpiar pantalla
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //Llamar los metodos de la clase Stage
+        super.act(delta);
+        super.draw();
     }
 
     @Override
     public void resize(int width, int height) {
-        // This method is invoked when the game is resized (desktop).
+        getViewport().update(width, height);
     }
 
     @Override
     public void pause() {
         // This method is invoked when the game is paused.
     }
-
     @Override
     public void resume() {
         // This method is invoked when the game is resumed.
     }
-
     @Override
     public void hide() {
         // This method is invoked when the screen is no more displayed.
     }
-
     @Override
     public void dispose() {
         // This method is invoked when the game closes.
