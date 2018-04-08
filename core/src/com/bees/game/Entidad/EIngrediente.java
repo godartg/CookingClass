@@ -70,8 +70,8 @@ public class EIngrediente extends Actor{
     }
     /*
      * La clase permite:
-     * - El InputListener y hacer un Drag and Drop
-     * - Verificar si existe colisión entre el ingrediente y el lugar de preparación
+     * El InputListener y hacer un Drag and Drop
+     * Verificar si existe colisión entre el ingrediente y el lugar de preparación
      *
      */
     public static class AgregarListener extends InputListener {
