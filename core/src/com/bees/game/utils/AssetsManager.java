@@ -5,6 +5,10 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import net.dermetfan.gdx.assets.AnnotationAssetManager;
 /**
+ * Con esta clase gestionaremos mejor los recursos de imagenes y audios.
+ * AnnotationAssetManager es otra herramienta que viene con la biblioteca libgdx-utils.
+ * Es una herramienta que simplifica toda la situación aún más. Como puedes imaginar, utilizaremos anotaciones.
+ * @see <a href="http://www.codinginsights.blog/libgdx-assetmanager/">Assets libgdx</a>
  * Created by workaholic on 9/04/2018.
  */
 
