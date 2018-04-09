@@ -2,10 +2,13 @@ package com.bees.game.utils;
 
 import com.bees.game.Entidad.Evaluacion;
 import com.bees.game.Presentacion.BaseScreen;
+import com.bees.game.Presentacion.ConfiguracionScreen;
 import com.bees.game.Presentacion.GameScreen;
 import com.bees.game.Presentacion.LoadingScreen;
 import com.bees.game.Presentacion.MenuScreen;
 import com.bees.game.Presentacion.ScoreScreen;
+import com.bees.game.Presentacion.SelectionLevelScreen;
+import com.bees.game.Presentacion.TutorialScreen;
 
 /**
  * Para gestionar las escenas, crearemos un tipo Enum de java, llamado ScreenEnum, con la lista de
@@ -51,7 +54,7 @@ public enum ScreenEnum {
         public BaseScreen getScreen(Object... params){
             return new ScoreScreen((Evaluacion) params[0]);
         }
-    }
+    };
 
     public abstract BaseScreen getScreen(Object... params);
 }
