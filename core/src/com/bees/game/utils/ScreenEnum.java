@@ -34,7 +34,7 @@ public enum ScreenEnum {
     },
     TUTORIAL_SCREEN{
         public BaseScreen getScreen(Object... params){
-            return new TutorilScreen();
+            return new TutorialScreen();
         }
     },
     SELECCION_LEVEL_SCREEN{
