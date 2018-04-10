@@ -2,38 +2,30 @@ package com.bees.game.Presentacion;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.bees.game.Entidad.EIngrediente;
 import com.bees.game.Entidad.ELugarPrep;
-import com.bees.game.MainGame;
+import com.bees.game.utils.ScreenEnum;
+import com.bees.game.utils.ScreenManager;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
+import static com.bees.game.MainGame.manager;
+
 /**
  * @author Edwin César Condori Vilcapuma
- *
+ * @author Mauricio García Silva
  * Created by Edwin César Condori Vilcapuma on 20/03/2018.
  */
 
 public class GameScreen extends BaseScreen{
-    private Stage stage;
-
-    //Musica
     private Music backgroundMusic;
-    private Vector3 position;
     String ingredientes;
     private Label lblTitulo, lblLugarPrep;
     private Skin skin;
@@ -42,20 +34,15 @@ public class GameScreen extends BaseScreen{
     ELugarPrep lugarPrep;
     ImageButton btnizquierda, btnderecha, btnLugarPrep;
     private TextButton btnCocinar;
-
-    //Cuadro de dialogo
-    ExitDialog exitDialog;
     Texture lugarTexture;
     ArrayList<String> lugarArray = new ArrayList<String>();
     ArrayList<Texture> pathArray = new ArrayList<Texture>();
     ListIterator<String> llugar;
     ListIterator<Texture> lpath;
 
-    public GameScreen(MainGame game, String ingredientes) {
-        super(game);
+    public GameScreen( String ingredientes) {
+        super();
         this.ingredientes = ingredientes;
-        stage = new Stage(new FitViewport(640, 360));
-        position= new Vector3(stage.getCamera().position);
         skin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
         Label.LabelStyle stle_label= skin.get("title",Label.LabelStyle.class);
 
@@ -67,10 +54,10 @@ public class GameScreen extends BaseScreen{
         lugarArray.add("Sarten");
         lugarArray.add("Tabla");
         //array path of lugar de preparación
-        pathArray.add((Texture) game.getManager().get("recursos_imagenes/olla.png"));
-        pathArray.add((Texture) game.getManager().get("recursos_imagenes/posillo.png"));
-        pathArray.add((Texture) game.getManager().get("recursos_imagenes/sarten.png"));
-        pathArray.add((Texture) game.getManager().get("recursos_imagenes/tabla.png"));
+        pathArray.add((Texture) manager.get("recursos_imagenes/olla.png"));
+        pathArray.add((Texture) manager.get("recursos_imagenes/posillo.png"));
+        pathArray.add((Texture) manager.get("recursos_imagenes/sarten.png"));
+        pathArray.add((Texture) manager.get("recursos_imagenes/tabla.png"));
         llugar= lugarArray.listIterator();
         lpath= pathArray.listIterator();
 
@@ -115,23 +102,23 @@ public class GameScreen extends BaseScreen{
         btnderecha.setPosition(355,290);
         btnizquierda.setSize(49,49);
         btnizquierda.setPosition(570,290);
-        backgroundMusic=game.getManager().get("recursos_sonidos/Bolero.mp3");
+        backgroundMusic=manager.get("recursos_sonidos/Bolero.mp3");
 
 
     }
 
     @Override
-    public void show() {
-        lugarTexture = game.getManager().get("recursos_imagenes/olla.png");//
+    public void buildStage() {
+        lugarTexture = manager.get("recursos_imagenes/olla.png");//
         lugarPrep = new ELugarPrep(lugarTexture,370,50);
-        stage.addActor(lugarPrep);
-        final Texture lecheTexture=game.getManager().get("recursos_imagenes/milk.png");
+        addActor(lugarPrep);
+        final Texture lecheTexture=manager.get("recursos_imagenes/milk.png");
         leche = new EIngrediente(lecheTexture,30,230);
-        final Texture papaTexture=game.getManager().get("recursos_imagenes/potato.png");
+        final Texture papaTexture=manager.get("recursos_imagenes/potato.png");
         papa = new EIngrediente(papaTexture,110,230);
-        final Texture mantequillaTexture=game.getManager().get("recursos_imagenes/butter.png");
+        final Texture mantequillaTexture=manager.get("recursos_imagenes/butter.png");
         mantequilla = new EIngrediente(mantequillaTexture,190,230);
-        final Texture salTexture=game.getManager().get("recursos_imagenes/sal.png");
+        final Texture salTexture=manager.get("recursos_imagenes/sal.png");
         sal = new EIngrediente(salTexture,30,150);
         leche.setestadoIngrediente(false);
         papa.setestadoIngrediente(false);
@@ -163,32 +150,17 @@ public class GameScreen extends BaseScreen{
         }
 
         if (mantequillaexist){
-            stage.addActor(mantequilla);
+            addActor(mantequilla);
         }
         if (papaexist){
-            stage.addActor(papa);
+            addActor(papa);
         }
         if(lecheexist){
-            stage.addActor(leche);
+            addActor(leche);
         }
         if(salexist){
-            stage.addActor(sal);
+            addActor(sal);
         }
-
-        stage.addListener(new InputListener(){
-            @Override
-            public boolean keyDown(InputEvent event, int keycode) {
-                System.out.println("keycode "+keycode);
-                if(keycode==4 || keycode==82){
-                    exitDialog= new ExitDialog("Confirmación de salida",skin);
-                    exitDialog.show(stage);
-                    exitDialog.pack();
-                    //Gdx.app.exit();
-                    return true;
-                }
-                return super.keyDown(event, keycode);
-            }
-        });
         //Crear skin para Textbutton
         TextButton.TextButtonStyle style_btn= skin.get(TextButton.TextButtonStyle.class);
         btnCocinar= new TextButton("Cocinar", style_btn);
@@ -210,42 +182,32 @@ public class GameScreen extends BaseScreen{
                 if (sal.getestadoIngrediente()){
                     puntaje+=5;
                 }
-
-                game.evaluar(puntaje);
-
-
+                ScreenManager.getInstance().showScreen( ScreenEnum.MENU_SCREEN );
             }
         });
 
         backgroundMusic.setVolume(1);
         backgroundMusic.play();
-        stage.addActor(lblTitulo);
-        stage.addActor(lblLugarPrep);
-        stage.addActor(btnderecha);
-        stage.addActor(btnizquierda);
-        stage.addActor(btnCocinar);
-        Gdx.input.setInputProcessor(stage);
+        addActor(lblTitulo);
+        addActor(lblLugarPrep);
+        addActor(btnderecha);
+        addActor(btnizquierda);
+        addActor(btnCocinar);
     }
+
 
 
 
     @Override
     public void hide() {
-        stage.clear();
+        super.clear();
         Gdx.input.setInputProcessor(null);
     }
 
     @Override
     public void dispose() {
-        stage.dispose();
+        super.dispose();
     }
 
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(182/255f,222/255f,232/255f, 1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act();
-        stage.draw();
-    }
 
 }
