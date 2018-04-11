@@ -11,12 +11,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.bees.game.Entidad.EIngrediente;
 import com.bees.game.Entidad.ELugarPrep;
+import com.bees.game.utils.AssetsManager;
 import com.bees.game.utils.ScreenEnum;
 import com.bees.game.utils.ScreenManager;
+
+import net.dermetfan.gdx.assets.AnnotationAssetManager;
+
 import java.util.ArrayList;
 import java.util.ListIterator;
 
-import static com.bees.game.MainGame.manager;
 
 /**
  * @author Edwin César Condori Vilcapuma
@@ -25,16 +28,16 @@ import static com.bees.game.MainGame.manager;
  */
 
 public class GameScreen extends BaseScreen{
-    private Music backgroundMusic;
+    //private Music backgroundMusic;
     String ingredientes;
     private Label lblTitulo, lblLugarPrep;
     private Skin skin;
-
+    AnnotationAssetManager manager;
     EIngrediente leche, papa, mantequilla,sal;
     ELugarPrep lugarPrep;
     ImageButton btnizquierda, btnderecha, btnLugarPrep;
     private TextButton btnCocinar;
-    Texture lugarTexture;
+    Texture lugarTexture,ollaTexture, posilloTexture, sartenTexture, tablaTexture;
     ArrayList<String> lugarArray = new ArrayList<String>();
     ArrayList<Texture> pathArray = new ArrayList<Texture>();
     ListIterator<String> llugar;
@@ -42,6 +45,7 @@ public class GameScreen extends BaseScreen{
 
     public GameScreen( String ingredientes) {
         super();
+        manager= new AnnotationAssetManager();
         this.ingredientes = ingredientes;
         skin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
         Label.LabelStyle stle_label= skin.get("title",Label.LabelStyle.class);
@@ -54,10 +58,14 @@ public class GameScreen extends BaseScreen{
         lugarArray.add("Sarten");
         lugarArray.add("Tabla");
         //array path of lugar de preparación
-        pathArray.add((Texture) manager.get("recursos_imagenes/olla.png"));
-        pathArray.add((Texture) manager.get("recursos_imagenes/posillo.png"));
-        pathArray.add((Texture) manager.get("recursos_imagenes/sarten.png"));
-        pathArray.add((Texture) manager.get("recursos_imagenes/tabla.png"));
+        ollaTexture=manager.get(AssetsManager.OLLA);
+        posilloTexture= manager.get(AssetsManager.POSILLO);
+        sartenTexture= manager.get(AssetsManager.SARTEN);
+        tablaTexture= manager.get(AssetsManager.TABLA);
+        pathArray.add(ollaTexture );
+        pathArray.add(posilloTexture);
+        pathArray.add(sartenTexture);
+        pathArray.add(tablaTexture);
         llugar= lugarArray.listIterator();
         lpath= pathArray.listIterator();
 
@@ -102,23 +110,22 @@ public class GameScreen extends BaseScreen{
         btnderecha.setPosition(355,290);
         btnizquierda.setSize(49,49);
         btnizquierda.setPosition(570,290);
-        backgroundMusic=manager.get("recursos_sonidos/Bolero.mp3");
-
+       // backgroundMusic=manager.get("recursos_sonidos/Bolero.mp3");
 
     }
 
     @Override
     public void buildStage() {
-        lugarTexture = manager.get("recursos_imagenes/olla.png");//
+        lugarTexture = manager.get(AssetsManager.OLLA);//
         lugarPrep = new ELugarPrep(lugarTexture,370,50);
         addActor(lugarPrep);
-        final Texture lecheTexture=manager.get("recursos_imagenes/milk.png");
+        Texture lecheTexture=manager.get(AssetsManager.LECHE);
         leche = new EIngrediente(lecheTexture,30,230);
-        final Texture papaTexture=manager.get("recursos_imagenes/potato.png");
+        Texture papaTexture=manager.get(AssetsManager.POTATO);
         papa = new EIngrediente(papaTexture,110,230);
-        final Texture mantequillaTexture=manager.get("recursos_imagenes/butter.png");
+        Texture mantequillaTexture=manager.get(AssetsManager.MANTEQUILLA);
         mantequilla = new EIngrediente(mantequillaTexture,190,230);
-        final Texture salTexture=manager.get("recursos_imagenes/sal.png");
+        Texture salTexture=manager.get(AssetsManager.SAL);
         sal = new EIngrediente(salTexture,30,150);
         leche.setestadoIngrediente(false);
         papa.setestadoIngrediente(false);
@@ -186,8 +193,8 @@ public class GameScreen extends BaseScreen{
             }
         });
 
-        backgroundMusic.setVolume(1);
-        backgroundMusic.play();
+        //backgroundMusic.setVolume(1);
+        //backgroundMusic.play();
         addActor(lblTitulo);
         addActor(lblLugarPrep);
         addActor(btnderecha);

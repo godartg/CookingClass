@@ -17,7 +17,9 @@ import com.bees.game.utils.AssetsManager;
 import com.bees.game.utils.ScreenEnum;
 import com.bees.game.utils.ScreenManager;
 
-import static com.bees.game.MainGame.manager;
+import net.dermetfan.gdx.assets.AnnotationAssetManager;
+
+
 
 /**
  * @author Edwin César Condori Vilcapuma
@@ -26,7 +28,7 @@ import static com.bees.game.MainGame.manager;
  */
 
 public class SelectionLevelScreen extends BaseScreen{
-    private Music backgroundMusic;
+    //private Music backgroundMusic;
     /**
      * The stage where all the buttons are added.
      */
@@ -36,8 +38,10 @@ public class SelectionLevelScreen extends BaseScreen{
     private Skin skin;
     private CheckBox chIngrediente1,chIngrediente2,chIngrediente3, chIngrediente4;
     private Texture fondoPantalla, mantequila, papa, leche, sal;
+    AnnotationAssetManager manager;
     public SelectionLevelScreen() {
         super();
+        manager= new AnnotationAssetManager();
         fondoPantalla = manager.get(AssetsManager.SUPERMARKET);
         mantequila= manager.get(AssetsManager.MANTEQUILLA);
         papa= manager.get(AssetsManager.POTATO);
@@ -107,17 +111,14 @@ public class SelectionLevelScreen extends BaseScreen{
                     Gdx.app.log("checked","1");
                 }
                 if (chIngrediente2.isChecked()){
-                    //ingredientesArray.add(2);
                     ingredientes+="2,";
                     Gdx.app.log("checked","2");
                 }
                 if (chIngrediente3.isChecked()){
-                    //ingredientesArray.add(3);
                     ingredientes+="3,";
                     Gdx.app.log("checked","3");
                 }
                 if (chIngrediente4.isChecked()){
-                    //ingredientesArray.add(4);
                     ingredientes+="4,";
                     Gdx.app.log("checked","4");
                 }

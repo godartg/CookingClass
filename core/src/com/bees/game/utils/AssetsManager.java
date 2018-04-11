@@ -36,14 +36,14 @@ public class AssetsManager {
         POSILLO="recursos_imagenes/posillo.png",
         SARTEN="recursos_imagenes/sarten.png",
         TABLA="recursos_imagenes/tabla.png";
-    @AnnotationAssetManager.Asset(Music.class)
-    public static final String
-        MENUET="audio/Menuet.ogg",
-        WEINER="audio/Wiener.ogg",
-        BOLERO="recursos_sonidos/Bolero.mp3";
-    @AnnotationAssetManager.Asset(Sound.class)
-    public static final String
-        JUMP="audio/jump.ogg";
+    //@AnnotationAssetManager.Asset(Music.class)
+    //public static final String
+        //MENUET="audio/Menuet.ogg",
+        //WEINER="audio/Wiener.ogg",
+        //BOLERO="recursos_sonidos/Bolero.mp3";
+    //@AnnotationAssetManager.Asset(Sound.class)
+    //public static final String
+        //JUMP="audio/jump.ogg";
 
     private AssetsManager(){
 

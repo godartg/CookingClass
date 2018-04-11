@@ -11,13 +11,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.bees.game.utils.AssetsManager;
 import com.bees.game.utils.ScreenEnum;
 import com.bees.game.utils.UIFactory;
 
-import static com.bees.game.MainGame.manager;
+import net.dermetfan.gdx.assets.AnnotationAssetManager;
+
 
 /**
  * @author Edwin César Condori Vilcapuma
@@ -31,9 +30,11 @@ public class ScoreScreen extends BaseScreen{
     private Label lbltitulo,lblScore;
     TextButton btnRegresarMenu;
     Texture fondoPantalla;
+    AnnotationAssetManager manager;
 
     public ScoreScreen( int score) {
         super();
+        manager= new AnnotationAssetManager();
         fondoPantalla= manager.get(AssetsManager.PUNTUACION);
         fondo_pantalla= new Image(fondoPantalla);
         fondo_pantalla.setSize(640, 360);

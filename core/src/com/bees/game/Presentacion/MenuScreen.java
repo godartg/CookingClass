@@ -11,7 +11,7 @@ import com.bees.game.utils.AssetsManager;
 import com.bees.game.utils.ScreenEnum;
 import com.bees.game.utils.UIFactory;
 
-import static com.bees.game.MainGame.manager;
+import net.dermetfan.gdx.assets.AnnotationAssetManager;
 
 /**
  * Pantalla Menu para seleccionar si jugar o no
@@ -26,9 +26,11 @@ public class MenuScreen extends BaseScreen{
     private Texture fondoPantalla;
     private Image imagenFondo;
     private TextButton btnPlay, btnSalir;
+    AnnotationAssetManager manager;
 
     public MenuScreen() {
         super();
+        manager= new AnnotationAssetManager();
         skin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
         fondoPantalla= manager.get(AssetsManager.COMIDAS);
         btnPlay = new TextButton("Jugar", skin);
