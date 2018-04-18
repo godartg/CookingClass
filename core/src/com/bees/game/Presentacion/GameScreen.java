@@ -1,7 +1,6 @@
 package com.bees.game.Presentacion;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -11,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.bees.game.Entidad.EIngrediente;
 import com.bees.game.Entidad.ELugarPrep;
-import com.bees.game.utils.AssetsManager;
+import com.bees.game.assets.GameAssets;
 import com.bees.game.utils.ScreenEnum;
 import com.bees.game.utils.ScreenManager;
 
@@ -28,11 +27,10 @@ import java.util.ListIterator;
  */
 
 public class GameScreen extends BaseScreen{
-    //private Music backgroundMusic;
+    private AnnotationAssetManager manager;
     String ingredientes;
     private Label lblTitulo, lblLugarPrep;
     private Skin skin;
-    AnnotationAssetManager manager;
     EIngrediente leche, papa, mantequilla,sal;
     ELugarPrep lugarPrep;
     ImageButton btnizquierda, btnderecha, btnLugarPrep;
@@ -43,9 +41,9 @@ public class GameScreen extends BaseScreen{
     ListIterator<String> llugar;
     ListIterator<Texture> lpath;
 
-    public GameScreen( String ingredientes) {
+    public GameScreen(String ingredientes, AnnotationAssetManager param) {
         super();
-        manager= new AnnotationAssetManager();
+        manager= param;
         this.ingredientes = ingredientes;
         skin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
         Label.LabelStyle stle_label= skin.get("title",Label.LabelStyle.class);
@@ -58,10 +56,10 @@ public class GameScreen extends BaseScreen{
         lugarArray.add("Sarten");
         lugarArray.add("Tabla");
         //array path of lugar de preparación
-        ollaTexture=manager.get(AssetsManager.OLLA);
-        posilloTexture= manager.get(AssetsManager.POSILLO);
-        sartenTexture= manager.get(AssetsManager.SARTEN);
-        tablaTexture= manager.get(AssetsManager.TABLA);
+        ollaTexture=manager.get(GameAssets.OLLA);
+        posilloTexture= manager.get(GameAssets.POSILLO);
+        sartenTexture= manager.get(GameAssets.SARTEN);
+        tablaTexture= manager.get(GameAssets.TABLA);
         pathArray.add(ollaTexture );
         pathArray.add(posilloTexture);
         pathArray.add(sartenTexture);
@@ -116,16 +114,16 @@ public class GameScreen extends BaseScreen{
 
     @Override
     public void buildStage() {
-        lugarTexture = manager.get(AssetsManager.OLLA);//
+        lugarTexture = manager.get(GameAssets.OLLA);//
         lugarPrep = new ELugarPrep(lugarTexture,370,50);
         addActor(lugarPrep);
-        Texture lecheTexture=manager.get(AssetsManager.LECHE);
+        Texture lecheTexture=manager.get(GameAssets.LECHE);
         leche = new EIngrediente(lecheTexture,30,230);
-        Texture papaTexture=manager.get(AssetsManager.POTATO);
+        Texture papaTexture=manager.get(GameAssets.POTATO);
         papa = new EIngrediente(papaTexture,110,230);
-        Texture mantequillaTexture=manager.get(AssetsManager.MANTEQUILLA);
+        Texture mantequillaTexture=manager.get(GameAssets.MANTEQUILLA);
         mantequilla = new EIngrediente(mantequillaTexture,190,230);
-        Texture salTexture=manager.get(AssetsManager.SAL);
+        Texture salTexture=manager.get(GameAssets.SAL);
         sal = new EIngrediente(salTexture,30,150);
         leche.setestadoIngrediente(false);
         papa.setestadoIngrediente(false);
@@ -189,7 +187,7 @@ public class GameScreen extends BaseScreen{
                 if (sal.getestadoIngrediente()){
                     puntaje+=5;
                 }
-                ScreenManager.getInstance().showScreen( ScreenEnum.MENU_SCREEN );
+                ScreenManager.getInstance().showScreen( ScreenEnum.SCORE_SCREEN, puntaje );
             }
         });
 
@@ -215,6 +213,7 @@ public class GameScreen extends BaseScreen{
     public void dispose() {
         super.dispose();
     }
+
 
 
 }

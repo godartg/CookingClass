@@ -1,24 +1,20 @@
 package com.bees.game.Presentacion;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.bees.game.utils.AssetsManager;
+import com.bees.game.assets.SelectionLevelAssets;
 import com.bees.game.utils.ScreenEnum;
 import com.bees.game.utils.ScreenManager;
 
 import net.dermetfan.gdx.assets.AnnotationAssetManager;
-
 
 
 /**
@@ -38,15 +34,15 @@ public class SelectionLevelScreen extends BaseScreen{
     private Skin skin;
     private CheckBox chIngrediente1,chIngrediente2,chIngrediente3, chIngrediente4;
     private Texture fondoPantalla, mantequila, papa, leche, sal;
-    AnnotationAssetManager manager;
-    public SelectionLevelScreen() {
+    AssetManager manager;
+    public SelectionLevelScreen(AnnotationAssetManager param) {
         super();
-        manager= new AnnotationAssetManager();
-        fondoPantalla = manager.get(AssetsManager.SUPERMARKET);
-        mantequila= manager.get(AssetsManager.MANTEQUILLA);
-        papa= manager.get(AssetsManager.POTATO);
-        leche= manager.get(AssetsManager.LECHE);
-        sal= manager.get(AssetsManager.SAL);
+        manager= param;
+        fondoPantalla = manager.get(SelectionLevelAssets.SUPERMARKET);
+        mantequila= manager.get(SelectionLevelAssets.MANTEQUILLA);
+        papa= manager.get(SelectionLevelAssets.POTATO);
+        leche= manager.get(SelectionLevelAssets.LECHE);
+        sal= manager.get(SelectionLevelAssets.SAL);
 
         //Importacion de los recursos para skins
         skin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));

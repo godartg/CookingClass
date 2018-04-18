@@ -1,17 +1,12 @@
 package com.bees.game.Presentacion;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.bees.game.utils.AssetsManager;
+import com.bees.game.assets.ScoreAssets;
 import com.bees.game.utils.ScreenEnum;
 import com.bees.game.utils.UIFactory;
 
@@ -32,10 +27,10 @@ public class ScoreScreen extends BaseScreen{
     Texture fondoPantalla;
     AnnotationAssetManager manager;
 
-    public ScoreScreen( int score) {
+    public ScoreScreen(int score, AnnotationAssetManager param) {
         super();
-        manager= new AnnotationAssetManager();
-        fondoPantalla= manager.get(AssetsManager.PUNTUACION);
+        manager= param;
+        fondoPantalla= manager.get(ScoreAssets.PUNTUACION);
         fondo_pantalla= new Image(fondoPantalla);
         fondo_pantalla.setSize(640, 360);
         fondo_pantalla.setPosition(0, 0);

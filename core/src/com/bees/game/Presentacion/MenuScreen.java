@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.bees.game.utils.AssetsManager;
+import com.bees.game.assets.MenuAssets;
 import com.bees.game.utils.ScreenEnum;
 import com.bees.game.utils.UIFactory;
 
@@ -28,11 +28,11 @@ public class MenuScreen extends BaseScreen{
     private TextButton btnPlay, btnSalir;
     AnnotationAssetManager manager;
 
-    public MenuScreen() {
+    public MenuScreen(AnnotationAssetManager param) {
         super();
-        manager= new AnnotationAssetManager();
+        manager= param;
         skin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
-        fondoPantalla= manager.get(AssetsManager.COMIDAS);
+        fondoPantalla= manager.get(MenuAssets.COMIDAS);
         btnPlay = new TextButton("Jugar", skin);
         btnSalir = new TextButton("Recetas", skin);
     }

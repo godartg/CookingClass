@@ -3,7 +3,8 @@ package com.bees.game.Presentacion;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.bees.game.utils.AssetsManager;
+import com.bees.game.assets.BaseAssets;
+import com.bees.game.assets.LoadingAssets;
 import com.bees.game.utils.ScreenEnum;
 import com.bees.game.utils.ScreenManager;
 
@@ -18,27 +19,27 @@ import net.dermetfan.gdx.assets.AnnotationAssetManager;
  */
 
 public class LoadingScreen extends BaseScreen{
-    private final AnnotationAssetManager manager;
+    private final AnnotationAssetManager manager, manager2;
     private Skin skin;
-
     private Label loading;
-
-    public LoadingScreen() {
+    private ScreenEnum siguienteScreen;
+    public LoadingScreen(ScreenEnum param, BaseAssets baseAssets) {
         super();
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-        manager= new AnnotationAssetManager();
-
+        manager= baseAssets.manager;
+        manager2=LoadingAssets.manager;
+        siguienteScreen=param;
     }
 
     @Override
     public void buildStage() {
-        manager.load(AssetsManager.class);
+        manager2.load(LoadingAssets.class);
         loading = new Label("Loading...", skin);
         loading.setPosition(320 - loading.getWidth() / 2, 180 - loading.getHeight() / 2);
         addActor(loading);
         if (manager.update()) {
             manager.finishLoading();
-            ScreenManager.getInstance().showScreen( ScreenEnum.MENU_SCREEN );
+            ScreenManager.getInstance().showScreen( siguienteScreen, manager);
         } else {
             int progress = (int) (manager.getProgress() * 100);
             loading.setText("Loading... " + progress + "%");

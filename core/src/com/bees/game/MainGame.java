@@ -1,6 +1,7 @@
 package com.bees.game;
 
 import com.badlogic.gdx.Game;
+import com.bees.game.assets.MenuAssets;
 import com.bees.game.utils.ScreenEnum;
 import com.bees.game.utils.ScreenManager;
 
@@ -15,11 +16,11 @@ import com.bees.game.utils.ScreenManager;
  */
 
 public class MainGame extends Game{
-
+    MenuAssets menuAssets;
     @Override
     public void create () {
         ScreenManager.getInstance().initialize(this);
-        ScreenManager.getInstance().showScreen( ScreenEnum.LOADING_SCREEN );
+        ScreenManager.getInstance().showScreen( ScreenEnum.LOADING_SCREEN,  menuAssets);
     }
 
 }

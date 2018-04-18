@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
  * Created by Edwin César Condori Vilcapuma on 20/03/2018.
  */
 
-public abstract class BaseScreen extends Stage implements Screen {
+public abstract class BaseScreen extends Stage implements Screen{
 
     public BaseScreen() {
         super(new StretchViewport(640, 360, new OrthographicCamera()));

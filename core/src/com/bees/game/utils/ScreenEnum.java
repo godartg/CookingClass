@@ -1,6 +1,5 @@
 package com.bees.game.utils;
 
-import com.bees.game.Entidad.Evaluacion;
 import com.bees.game.Presentacion.BaseScreen;
 import com.bees.game.Presentacion.ConfiguracionScreen;
 import com.bees.game.Presentacion.GameScreen;
@@ -9,6 +8,9 @@ import com.bees.game.Presentacion.MenuScreen;
 import com.bees.game.Presentacion.ScoreScreen;
 import com.bees.game.Presentacion.SelectionLevelScreen;
 import com.bees.game.Presentacion.TutorialScreen;
+import com.bees.game.assets.BaseAssets;
+
+import net.dermetfan.gdx.assets.AnnotationAssetManager;
 
 /**
  * Para gestionar las escenas, crearemos un tipo Enum de java, llamado ScreenEnum, con la lista de
@@ -22,37 +24,37 @@ import com.bees.game.Presentacion.TutorialScreen;
 public enum ScreenEnum {
     LOADING_SCREEN{
         public BaseScreen getScreen(Object... params){
-            return new LoadingScreen();
+            return new LoadingScreen((ScreenEnum) params[0], (BaseAssets) params[0]);
         }
     },
     MENU_SCREEN{
         public BaseScreen getScreen(Object... params){
-            return new MenuScreen();
+            return new MenuScreen((AnnotationAssetManager) params[0]);
         }
     },
     CONFIGURACION_SCREEN{
         public BaseScreen getScreen(Object... params){
-            return new ConfiguracionScreen();
+            return new ConfiguracionScreen((AnnotationAssetManager) params[0]);
         }
     },
     TUTORIAL_SCREEN{
         public BaseScreen getScreen(Object... params){
-            return new TutorialScreen();
+            return new TutorialScreen((AnnotationAssetManager) params[0]);
         }
     },
     SELECCION_LEVEL_SCREEN{
         public BaseScreen getScreen(Object... params){
-            return new SelectionLevelScreen();
+            return new SelectionLevelScreen((AnnotationAssetManager) params[0]);
         }
     },
     GAME_SCREEN{
         public BaseScreen getScreen(Object... params){
-            return new GameScreen((String) params[0]);
+            return new GameScreen((String) params[0], (AnnotationAssetManager) params[0]);
         }
     },
     SCORE_SCREEN{
         public BaseScreen getScreen(Object... params){
-            return new ScoreScreen((Integer) params[0]);
+            return new ScoreScreen((Integer) params[0], (AnnotationAssetManager) params[0]);
         }
     };
 
