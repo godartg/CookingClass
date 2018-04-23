@@ -9,16 +9,7 @@ import net.dermetfan.gdx.assets.AnnotationAssetManager;
  * @author Mauricio García Silva
  */
 
-public class TutorialAssets extends BaseAssets{
+public class TutorialAssets {
 
-    public TutorialAssets(AnnotationAssetManager annotationAssetManager){
-        manager= annotationAssetManager;
-    }
-    public void load(){
-        manager = new AnnotationAssetManager();
-        manager.load(TutorialAssets.class);
-    }
-    public void dispose(){
-        manager.dispose();
-    }
+
 }

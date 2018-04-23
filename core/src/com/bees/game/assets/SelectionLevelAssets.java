@@ -11,23 +11,13 @@ import net.dermetfan.gdx.assets.AnnotationAssetManager;
  * @author Mauricio García Silva
  */
 
-public class SelectionLevelAssets extends BaseAssets{
-    public static AnnotationAssetManager manager;
+public class SelectionLevelAssets {
     @AnnotationAssetManager.Asset(Texture.class)
     public static final String
-        SUPERMARKET = "recursos_imagenes/supermarket.jpg",
+        SUPERMARKET = "recursos_imagenes/supermarket.png",
         MANTEQUILLA="recursos_imagenes/butter.png",
         LECHE="recursos_imagenes/milk.png",
         POTATO="recursos_imagenes/potato.png",
         SAL="recursos_imagenes/sal.png";
-    public SelectionLevelAssets(AnnotationAssetManager annotationAssetManager){
-        manager= annotationAssetManager;
-    }
-    public void load(){
-        manager = new AnnotationAssetManager();
-        manager.load(SelectionLevelAssets.class);
-    }
-    public void dispose(){
-        manager.dispose();
-    }
+
 }

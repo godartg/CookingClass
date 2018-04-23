@@ -11,19 +11,9 @@ import net.dermetfan.gdx.assets.AnnotationAssetManager;
  * @author Mauricio García Silva
  */
 
-public class ScoreAssets extends BaseAssets{
-    public static AnnotationAssetManager manager;
+public class ScoreAssets {
     @AnnotationAssetManager.Asset(Texture.class)
     public static final String
     PUNTUACION="recursos_imagenes/puntuacion.png";
-    public ScoreAssets(AnnotationAssetManager annotationAssetManager){
-        manager= annotationAssetManager;
-    }
-    public void load(){
-        manager = new AnnotationAssetManager();
-        manager.load(ScoreAssets.class);
-    }
-    public void dispose(){
-        manager.dispose();
-    }
+
 }

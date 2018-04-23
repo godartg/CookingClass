@@ -7,9 +7,8 @@ import net.dermetfan.gdx.assets.AnnotationAssetManager;
  */
 
 public class TutorialScreen extends BaseScreen{
-    AnnotationAssetManager manager;
 
-    public TutorialScreen(AnnotationAssetManager param) {
+    public TutorialScreen() {
 
     }
 

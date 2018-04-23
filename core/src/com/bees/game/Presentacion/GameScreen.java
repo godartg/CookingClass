@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.bees.game.Entidad.EIngrediente;
 import com.bees.game.Entidad.ELugarPrep;
 import com.bees.game.assets.GameAssets;
+import com.bees.game.assets.ScoreAssets;
 import com.bees.game.utils.ScreenEnum;
 import com.bees.game.utils.ScreenManager;
 
@@ -40,10 +41,10 @@ public class GameScreen extends BaseScreen{
     ArrayList<Texture> pathArray = new ArrayList<Texture>();
     ListIterator<String> llugar;
     ListIterator<Texture> lpath;
-
-    public GameScreen(String ingredientes, AnnotationAssetManager param) {
+    public GameScreen(String ingredientes) {
         super();
-        manager= param;
+        manager= new AnnotationAssetManager();
+        loadAssets();
         this.ingredientes = ingredientes;
         skin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
         Label.LabelStyle stle_label= skin.get("title",Label.LabelStyle.class);
@@ -110,6 +111,11 @@ public class GameScreen extends BaseScreen{
         btnizquierda.setPosition(570,290);
        // backgroundMusic=manager.get("recursos_sonidos/Bolero.mp3");
 
+    }
+
+    private void loadAssets() {
+        manager.load(GameAssets.class);
+        manager.finishLoading();
     }
 
     @Override
@@ -187,7 +193,7 @@ public class GameScreen extends BaseScreen{
                 if (sal.getestadoIngrediente()){
                     puntaje+=5;
                 }
-                ScreenManager.getInstance().showScreen( ScreenEnum.SCORE_SCREEN, puntaje );
+                ScreenManager.getInstance().showScreen(ScreenEnum.SCORE_SCREEN,puntaje);
             }
         });
 
@@ -212,6 +218,8 @@ public class GameScreen extends BaseScreen{
     @Override
     public void dispose() {
         super.dispose();
+        skin.dispose();
+        manager.dispose();
     }
 
 

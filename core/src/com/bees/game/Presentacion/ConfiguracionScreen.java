@@ -8,7 +8,7 @@ import net.dermetfan.gdx.assets.AnnotationAssetManager;
 
 public class ConfiguracionScreen extends BaseScreen {
     AnnotationAssetManager manager;
-    public ConfiguracionScreen(AnnotationAssetManager param){
+    public ConfiguracionScreen(){
         manager= new AnnotationAssetManager();
     }
     @Override

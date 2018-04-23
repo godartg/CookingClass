@@ -11,20 +11,9 @@ import net.dermetfan.gdx.assets.AnnotationAssetManager;
  * @author Mauricio García Silva
  */
 
-public class MenuAssets extends BaseAssets{
-    public static AnnotationAssetManager manager;
+public class MenuAssets {
     @AnnotationAssetManager.Asset(Texture.class)
     public static final String
         INTRO="recursos_imagenes/intro.jpg",
         COMIDAS="recursos_imagenes/comidas1a.jpg";
-    public MenuAssets(AnnotationAssetManager annotationAssetManager){
-        manager= annotationAssetManager;
-    }
-    public void load(){
-        manager = new AnnotationAssetManager();
-        manager.load(MenuAssets.class);
-    }
-    public void dispose(){
-        manager.dispose();
-    }
 }

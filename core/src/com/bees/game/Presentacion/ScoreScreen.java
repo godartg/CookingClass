@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.bees.game.assets.MenuAssets;
 import com.bees.game.assets.ScoreAssets;
 import com.bees.game.utils.ScreenEnum;
 import com.bees.game.utils.UIFactory;
@@ -26,10 +27,10 @@ public class ScoreScreen extends BaseScreen{
     TextButton btnRegresarMenu;
     Texture fondoPantalla;
     AnnotationAssetManager manager;
-
-    public ScoreScreen(int score, AnnotationAssetManager param) {
+    public ScoreScreen(int score) {
         super();
-        manager= param;
+        manager= new AnnotationAssetManager();
+        loadAssets();
         fondoPantalla= manager.get(ScoreAssets.PUNTUACION);
         fondo_pantalla= new Image(fondoPantalla);
         fondo_pantalla.setSize(640, 360);
@@ -38,6 +39,11 @@ public class ScoreScreen extends BaseScreen{
         Label.LabelStyle stle_label= skin.get("title",Label.LabelStyle.class);
         lblScore = new Label(""+score, stle_label);
         lbltitulo = new Label( "Felicidades por tu score ", stle_label);
+    }
+
+    private void loadAssets() {
+        manager.load(ScoreAssets.class);
+        manager.finishLoading();
     }
 
     @Override
@@ -66,6 +72,8 @@ public class ScoreScreen extends BaseScreen{
     @Override
     public void dispose() {
         super.dispose();
+        skin.dispose();
+        manager.dispose();
     }
 
 }

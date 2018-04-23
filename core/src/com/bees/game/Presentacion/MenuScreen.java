@@ -24,26 +24,38 @@ public class MenuScreen extends BaseScreen{
 
     private Skin skin;
     private Texture fondoPantalla;
-    private Image imagenFondo;
-    private TextButton btnPlay, btnSalir;
     AnnotationAssetManager manager;
-
-    public MenuScreen(AnnotationAssetManager param) {
+    public MenuScreen() {
         super();
-        manager= param;
+        manager= new AnnotationAssetManager();
+        loadAssets();
         skin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
-        fondoPantalla= manager.get(MenuAssets.COMIDAS);
-        btnPlay = new TextButton("Jugar", skin);
-        btnSalir = new TextButton("Recetas", skin);
+
+    }
+
+    private void loadAssets() {
+        manager.load(MenuAssets.class);
+        manager.finishLoading();
     }
 
     @Override
     public void buildStage() {
+        Image imagenFondo;
+        TextButton btnPlay, btnSalir;
+        fondoPantalla= manager.get(MenuAssets.COMIDAS);
+        btnPlay = new TextButton("Jugar", skin);
+        btnSalir = new TextButton("Salir", skin);
         btnPlay.setSize(90, 100);
         btnPlay.setPosition(40, 140);
-        btnPlay.addListener(UIFactory.createListener(ScreenEnum.SELECCION_LEVEL_SCREEN));
         btnSalir.setSize(90, 100);
         btnSalir.setPosition(140, 140);
+        imagenFondo= new Image(fondoPantalla);
+        imagenFondo.setSize(640, 360);
+        imagenFondo.setPosition(0, 0);
+        addActor(imagenFondo);
+        addActor(btnPlay);
+        addActor(btnSalir);
+        btnPlay.addListener(UIFactory.createListener(ScreenEnum.SELECCION_LEVEL_SCREEN));
         btnSalir.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -51,18 +63,13 @@ public class MenuScreen extends BaseScreen{
                 return false;
             }
         });
-        imagenFondo= new Image(fondoPantalla);
-        imagenFondo.setSize(640, 360);
-        imagenFondo.setPosition(0, 0);
-        addActor(imagenFondo);
-        addActor(btnPlay);
-        addActor(btnSalir);
     }
 
     @Override
     public void dispose() {
         super.dispose();
         skin.dispose();
+        manager.dispose();
     }
 
 }

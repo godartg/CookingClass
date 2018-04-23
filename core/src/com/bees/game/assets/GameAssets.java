@@ -11,7 +11,7 @@ import net.dermetfan.gdx.assets.AnnotationAssetManager;
  * @author Mauricio García Silva
  */
 
-public class GameAssets extends BaseAssets{
+public class GameAssets {
     @AnnotationAssetManager.Asset(Texture.class)
     public static final String
         COMIDAS="recursos_imagenes/comidas1a.jpg",
@@ -23,14 +23,5 @@ public class GameAssets extends BaseAssets{
         POSILLO="recursos_imagenes/posillo.png",
         SARTEN="recursos_imagenes/sarten.png",
         TABLA="recursos_imagenes/tabla.png";
-    public GameAssets(AnnotationAssetManager annotationAssetManager){
-        manager= annotationAssetManager;
-    }
-    public void load(){
-        manager = new AnnotationAssetManager();
-        manager.load(GameAssets.class);
-    }
-    public void dispose(){
-        manager.dispose();
-    }
+
 }

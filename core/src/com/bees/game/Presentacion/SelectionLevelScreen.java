@@ -1,7 +1,6 @@
 package com.bees.game.Presentacion;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
@@ -24,25 +23,32 @@ import net.dermetfan.gdx.assets.AnnotationAssetManager;
  */
 
 public class SelectionLevelScreen extends BaseScreen{
-    //private Music backgroundMusic;
-    /**
-     * The stage where all the buttons are added.
-     */
     private Image imagenFondo,imagenIngrediente1, imagenIngrediente2, imagenIngrediente3, imagenIngrediente4;
     private Label lblTitulo;
     private TextButton btnComenzar;
     private Skin skin;
     private CheckBox chIngrediente1,chIngrediente2,chIngrediente3, chIngrediente4;
-    private Texture fondoPantalla, mantequila, papa, leche, sal;
-    AssetManager manager;
-    public SelectionLevelScreen(AnnotationAssetManager param) {
+    AnnotationAssetManager manager;
+
+    public SelectionLevelScreen() {
         super();
-        manager= param;
-        fondoPantalla = manager.get(SelectionLevelAssets.SUPERMARKET);
-        mantequila= manager.get(SelectionLevelAssets.MANTEQUILLA);
-        papa= manager.get(SelectionLevelAssets.POTATO);
-        leche= manager.get(SelectionLevelAssets.LECHE);
-        sal= manager.get(SelectionLevelAssets.SAL);
+        manager= new AnnotationAssetManager();
+        loadAssets();
+
+    }
+
+    private void loadAssets() {
+        manager.load(SelectionLevelAssets.class);
+        manager.finishLoading();
+    }
+
+    @Override
+    public void buildStage() {
+        Texture fondoPantalla = manager.get(SelectionLevelAssets.SUPERMARKET);
+        Texture mantequila= manager.get(SelectionLevelAssets.MANTEQUILLA);
+        Texture papa= manager.get(SelectionLevelAssets.POTATO);
+        Texture leche= manager.get(SelectionLevelAssets.LECHE);
+        Texture sal= manager.get(SelectionLevelAssets.SAL);
 
         //Importacion de los recursos para skins
         skin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
@@ -74,12 +80,6 @@ public class SelectionLevelScreen extends BaseScreen{
         //Label
         lblTitulo.setSize(90,60);
         lblTitulo.setPosition(275,300);
-        //Button
-
-    }
-
-    @Override
-    public void buildStage() {
         imagenFondo= new Image(fondoPantalla);
         imagenFondo.setSize(640, 360);
         imagenFondo.setPosition(0, 0);
@@ -98,6 +98,18 @@ public class SelectionLevelScreen extends BaseScreen{
         btnComenzar.setSize(120,60);
         btnComenzar.setPosition(260,30);
 
+
+        addActor(imagenFondo);
+        addActor(chIngrediente1);
+        addActor(chIngrediente2);
+        addActor(chIngrediente3);
+        addActor(chIngrediente4);
+        addActor(btnComenzar);
+        addActor(imagenIngrediente1);
+        addActor(imagenIngrediente2);
+        addActor(imagenIngrediente3);
+        addActor(imagenIngrediente4);
+        addActor(lblTitulo);
         btnComenzar.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -118,20 +130,9 @@ public class SelectionLevelScreen extends BaseScreen{
                     ingredientes+="4,";
                     Gdx.app.log("checked","4");
                 }
-                ScreenManager.getInstance().showScreen( ScreenEnum.GAME_SCREEN, ingredientes );
+                ScreenManager.getInstance().showScreen( ScreenEnum.GAME_SCREEN, ingredientes);
             }
         });
-        addActor(imagenFondo);
-        addActor(chIngrediente1);
-        addActor(chIngrediente2);
-        addActor(chIngrediente3);
-        addActor(chIngrediente4);
-        addActor(btnComenzar);
-        addActor(imagenIngrediente1);
-        addActor(imagenIngrediente2);
-        addActor(imagenIngrediente3);
-        addActor(imagenIngrediente4);
-        addActor(lblTitulo);
     }
 
 
@@ -139,6 +140,7 @@ public class SelectionLevelScreen extends BaseScreen{
     public void dispose() {
         super.dispose();
         skin.dispose();
+        manager.dispose();
     }
 
 }
