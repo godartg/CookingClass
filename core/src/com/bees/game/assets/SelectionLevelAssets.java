@@ -7,6 +7,7 @@ import net.dermetfan.gdx.assets.AnnotationAssetManager;
 /**
  * Clase de recursos de la pantalla SelectionLevel
  * Created by workaholic on 16/04/2018.
+ * @see <a href="https://bitbucket.org/dermetfan/libgdx-utils/wiki/net.dermetfan.gdx.assets.AnnotationAssetManager">AnnotationAssetManager</a>
  * @author Edwin César Condori Vilcapuma
  * @author Mauricio García Silva
  */

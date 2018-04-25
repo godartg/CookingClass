@@ -116,19 +116,15 @@ public class SelectionLevelScreen extends BaseScreen{
                 String ingredientes="";
                 if(chIngrediente1.isChecked()){
                     ingredientes+="1,";
-                    Gdx.app.log("checked","1");
                 }
                 if (chIngrediente2.isChecked()){
                     ingredientes+="2,";
-                    Gdx.app.log("checked","2");
                 }
                 if (chIngrediente3.isChecked()){
                     ingredientes+="3,";
-                    Gdx.app.log("checked","3");
                 }
                 if (chIngrediente4.isChecked()){
                     ingredientes+="4,";
-                    Gdx.app.log("checked","4");
                 }
                 ScreenManager.getInstance().showScreen( ScreenEnum.GAME_SCREEN, ingredientes);
             }

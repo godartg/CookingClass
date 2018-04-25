@@ -74,7 +74,6 @@ public class GameScreen extends BaseScreen{
         btnderecha= new ImageButton(stle_btn);
         btnizquierda= new ImageButton(stle_btn1);
 
-        //Funcionalidad de botones
         btnderecha.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -89,15 +88,9 @@ public class GameScreen extends BaseScreen{
         btnizquierda.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                // Take me to the game screen!
                 if(llugar.hasNext()){
-                    //btnizquierda.setLayoutEnabled(true);
                     lblLugarPrep.setText(llugar.next());
                     lugarPrep.setTexture(lpath.next());
-                    //btnderecha.setLayoutEnabled(true);
-                }else{
-
-                    //btnizquierda.setLayoutEnabled(false);
                 }
             }
         });
