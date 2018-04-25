@@ -30,7 +30,7 @@ public abstract class BaseScreen extends Stage implements Screen{
     @Override
     public void render(float delta) {
         //Limpiar pantalla
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(182/255f,222/255f,232/255f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         //Llamar los metodos de la clase Stage
         super.act(delta);

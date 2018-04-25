@@ -98,6 +98,7 @@ public class EIngrediente extends Actor{
             dy = ingrediente.getY() - altura  + touchDown_y;
             ingrediente.setPosition(x + dx, y + dy);
         }
+
         public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
             //Verificar colisión
             if ((ingrediente.getX()>=lugarPrep.getX()&&ingrediente.getX()<=(lugarPrep.getX()+lugarPrep.getWidth()))&&(ingrediente.getY()>=lugarPrep.getY()&&ingrediente.getY()<=(lugarPrep.getY()+lugarPrep.getHeight()))){

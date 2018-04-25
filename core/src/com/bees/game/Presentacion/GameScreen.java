@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.bees.game.Entidad.EEvaluacion;
 import com.bees.game.Entidad.EIngrediente;
 import com.bees.game.Entidad.ELugarPrep;
 import com.bees.game.assets.GameAssets;
@@ -177,28 +178,8 @@ public class GameScreen extends BaseScreen{
         btnCocinar= new TextButton("Cocinar", style_btn);
         btnCocinar.setSize(120,60);
         btnCocinar.setPosition(280,30);
-        btnCocinar.addCaptureListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                int puntaje=0;
-                if(leche.getestadoIngrediente()){
-                    puntaje+=5;
-                }
-                if (mantequilla.getestadoIngrediente()){
-                    puntaje+=5;
-                }
-                if (papa.getestadoIngrediente()){
-                    puntaje+=5;
-                }
-                if (sal.getestadoIngrediente()){
-                    puntaje+=5;
-                }
-                ScreenManager.getInstance().showScreen(ScreenEnum.SCORE_SCREEN,puntaje);
-            }
-        });
+        btnCocinar.addCaptureListener(new EEvaluacion.EvaluarListener(leche,mantequilla,papa,sal));
 
-        //backgroundMusic.setVolume(1);
-        //backgroundMusic.play();
         addActor(lblTitulo);
         addActor(lblLugarPrep);
         addActor(btnderecha);

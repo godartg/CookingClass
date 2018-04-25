@@ -14,6 +14,10 @@ public class ELugarPrep extends Actor{
     /** The player texture. */
     private Texture texture;
 
+    public ELugarPrep() {
+
+    }
+
     public Texture getTexture() {
         return texture;
     }
@@ -22,25 +26,6 @@ public class ELugarPrep extends Actor{
         this.texture = texture;
     }
 
-    /** Entity's Attribute*/
-    private int LugarPrepId;
-    private String LugarPrepNombre;
-
-    public int getLugarPrepId() {
-        return LugarPrepId;
-    }
-
-    public void setLugarPrepId(int lugarPrepId) {
-        LugarPrepId = lugarPrepId;
-    }
-
-    public String getLugarPrepNombre() {
-        return LugarPrepNombre;
-    }
-
-    public void setLugarPrepNombre(String lugarPrepNombre) {
-        LugarPrepNombre = lugarPrepNombre;
-    }
 
     public ELugarPrep(Texture texture, float pX, float pY){
         this.texture = texture;
