@@ -1,12 +1,12 @@
 package com.bees.game.utils;
 
-import com.bees.game.Presentacion.BaseScreen;
-import com.bees.game.Presentacion.ConfiguracionScreen;
-import com.bees.game.Presentacion.GameScreen;
-import com.bees.game.Presentacion.MenuScreen;
-import com.bees.game.Presentacion.ScoreScreen;
-import com.bees.game.Presentacion.SelectionLevelScreen;
-import com.bees.game.Presentacion.TutorialScreen;
+import com.bees.game.presentacion.BaseScreen;
+import com.bees.game.presentacion.ConfiguracionScreen;
+import com.bees.game.presentacion.GameScreen;
+import com.bees.game.presentacion.MenuScreen;
+import com.bees.game.presentacion.ScoreScreen;
+import com.bees.game.presentacion.SelectionLevelScreen;
+import com.bees.game.presentacion.TutorialScreen;
 
 /**
  * Para gestionar las escenas, crearemos un tipo Enum de java, llamado ScreenEnum, con la lista de

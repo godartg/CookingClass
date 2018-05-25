@@ -1,4 +1,4 @@
-package com.bees.game.Presentacion;
+package com.bees.game.presentacion;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -8,13 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.bees.game.Entidad.EEvaluacion;
-import com.bees.game.Entidad.EIngrediente;
-import com.bees.game.Entidad.ELugarPrep;
+import com.bees.game.entidad.EEvaluacion;
+import com.bees.game.entidad.EIngrediente;
+import com.bees.game.entidad.ELugarPrep;
 import com.bees.game.assets.GameAssets;
-import com.bees.game.assets.ScoreAssets;
-import com.bees.game.utils.ScreenEnum;
-import com.bees.game.utils.ScreenManager;
 
 import net.dermetfan.gdx.assets.AnnotationAssetManager;
 

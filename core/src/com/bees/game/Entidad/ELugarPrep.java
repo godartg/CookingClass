@@ -1,4 +1,4 @@
-package com.bees.game.Entidad;
+package com.bees.game.entidad;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

@@ -2,7 +2,7 @@ package com.bees.game.utils;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
-import com.bees.game.Presentacion.BaseScreen;
+import com.bees.game.presentacion.BaseScreen;
 
 /**Esta clase, en combinación con ScreenEnum, nos permitirá cambiar de pantalla facilmente.
  * En esta clase se usa el patrón Singleton.
@@ -25,7 +25,9 @@ public class ScreenManager {
     public void initialize(Game game) {
         this.game = game;
     }
-
+    /*
+    *
+     */
     public void showScreen(ScreenEnum screenEnum, Object... params) {
         Screen currentScreen = game.getScreen();
         BaseScreen newScreen = screenEnum.getScreen(params);

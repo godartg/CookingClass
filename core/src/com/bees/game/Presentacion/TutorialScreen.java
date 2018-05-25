@@ -1,4 +1,4 @@
-package com.bees.game.Presentacion;
+package com.bees.game.presentacion;
 
 import net.dermetfan.gdx.assets.AnnotationAssetManager;
 
