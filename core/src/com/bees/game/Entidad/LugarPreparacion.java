@@ -10,11 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  * Created by workaholic on 20/03/2018.
  */
 
-public class ELugarPrep extends Actor{
+public class LugarPreparacion extends Actor{
     /** The player texture. */
     private Texture texture;
 
-    public ELugarPrep() {
+    public LugarPreparacion() {
 
     }
 
@@ -27,15 +27,14 @@ public class ELugarPrep extends Actor{
     }
 
 
-    public ELugarPrep(Texture texture, float pX, float pY){
+    public LugarPreparacion(Texture texture, float pX, float pY){
         this.texture = texture;
         setBounds(pX, pY,230,230);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-
-        batch.draw(texture, getX(), getY(),230,230);
+        batch.draw(texture, getX(), getY(),230,230); //
     }
 
     @Override

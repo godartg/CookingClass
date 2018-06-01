@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
  * Created by workaholic on 20/03/2018.
  */
 
-public class EIngrediente extends Actor{
+public class Ingrediente extends Actor{
     private int idIngrediente;
     private String nombreIngrediente;
     private boolean estadoIngrediente;
@@ -53,11 +53,11 @@ public class EIngrediente extends Actor{
     public void setIngredienteTexture(Texture ingredienteTexture) {
         this.ingredienteTexture = ingredienteTexture;
     }
-    public EIngrediente(){
+    public Ingrediente(){
 
     }
 
-    public EIngrediente(Texture texture, float x, float y){
+    public Ingrediente(Texture texture, float x, float y){
         this.ingredienteTexture = texture;
         setBounds(x, y,75,75);
 
@@ -68,11 +68,9 @@ public class EIngrediente extends Actor{
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(ingredienteTexture, getX(),getY(),75,75);
     }
-    /*
-     * La clase permite:
-     * - El InputListener y hacer un Drag and Drop
-     * - Verificar si existe colisión entre el ingrediente y el lugar de preparación
-     *
+
+    /**
+     *  Permitir un mejor manejo de eventos GUI
      */
     public static class AgregarListener extends InputListener {
         float altura = 75 / 2;
@@ -80,18 +78,20 @@ public class EIngrediente extends Actor{
         float touchDown_y;
         float dx;
         float dy;
-        EIngrediente ingrediente;
-        ELugarPrep lugarPrep;
-        public AgregarListener(EIngrediente eingrediente, ELugarPrep eLugarPrep){
-            ingrediente=eingrediente ;
-            lugarPrep=eLugarPrep;
+        Ingrediente ingrediente;
+        LugarPreparacion lugarPreparacion;
+        public AgregarListener(Ingrediente ingredienteActual, LugarPreparacion lugarPreparacion){
+            ingrediente=ingredienteActual ;
+            this.lugarPreparacion = lugarPreparacion;
         }
-        public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+
+         public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
             //Hallar posición del objeto
             touchDown_x = x;
             touchDown_y = altura - y;
             return true;
         }
+
         public void touchDragged(InputEvent event, float x, float y, int pointer) {
             //Mover el objeto
             dx = ingrediente.getX() - touchDown_x;
@@ -99,14 +99,19 @@ public class EIngrediente extends Actor{
             ingrediente.setPosition(x + dx, y + dy);
         }
 
+        /**
+         * Verificar colisión entre ingrediente y lugar de preparación
+         *  En caso de que halla colisión entre las coordenadas (x y) del evento y lugar de platillo el ingrediente ya no será visible y su estado true
+         *  En caso de que halla colisión entre las coordenadas (x y) del evento y lugar de platillo el ingrediente será visible y su estado false
+         */
         public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-            //Verificar colisión
-            if ((ingrediente.getX()>=lugarPrep.getX()&&ingrediente.getX()<=(lugarPrep.getX()+lugarPrep.getWidth()))&&(ingrediente.getY()>=lugarPrep.getY()&&ingrediente.getY()<=(lugarPrep.getY()+lugarPrep.getHeight()))){
+            if ((ingrediente.getX() >= lugarPreparacion.getX() && ingrediente.getX() <= (lugarPreparacion.getX() + lugarPreparacion.getWidth())) && (ingrediente.getY() >= lugarPreparacion.getY() && ingrediente.getY() <= (lugarPreparacion.getY() + lugarPreparacion.getHeight()))) {
                 ingrediente.setVisible(false);
                 ingrediente.setestadoIngrediente(true);
-            }else{
-                ingrediente.setPosition(30,230);
+            } else {
+                ingrediente.setPosition(30, 230);
             }
+
         }
     }
 }

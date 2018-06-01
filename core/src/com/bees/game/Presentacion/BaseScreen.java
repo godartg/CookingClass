@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 /**
- * Clase Abstracta que permite la correcta gestión de las pantallas, tambien permite darle un tamaño determinado
+ * Clase Abstracta que permite la gestion de pantallas
  * @author Edwin César Condori Vilcapuma
  * @see <a href="http://www.pixnbgames.com/blog/libgdx/how-to-manage-screens-in-libgdx/">How to manage screens in LibGDX</a>
  * Created by Edwin César Condori Vilcapuma on 20/03/2018.
@@ -19,8 +19,12 @@ public abstract class BaseScreen extends Stage implements Screen{
     public BaseScreen() {
         super(new StretchViewport(640, 360, new OrthographicCamera()));
     }
-    //Subclases deben cargar los actores en este método
+
+    /**
+     * Las clases deben cargar los actores en este método
+     */
     public abstract void buildStage();
+
     @Override
     public void show() {
         //Permite que la pantalla actual se visualice
@@ -37,25 +41,39 @@ public abstract class BaseScreen extends Stage implements Screen{
         super.draw();
     }
 
+    /**
+     * Permitir cambiar el tamaño de la pantalla
+     * @param width ancho de pantalla
+     * @param height alto de pantalla
+     */
     @Override
     public void resize(int width, int height) {
         getViewport().update(width, height);
     }
 
+    /**
+     * Pausa el juego
+     */
     @Override
     public void pause() {
-        // This method is invoked when the game is paused.
     }
+    /**
+     *  Continuar el juego despues de ser pausado
+     */
     @Override
     public void resume() {
         // This method is invoked when the game is resumed.
     }
+    /**
+     *  Ocultar la pantalla
+     */
     @Override
     public void hide() {
-        // This method is invoked when the screen is no more displayed.
     }
+    /**
+     *  Invocar el estado del juego cerrar
+     */
     @Override
     public void dispose() {
-        // This method is invoked when the game closes.
     }
 }

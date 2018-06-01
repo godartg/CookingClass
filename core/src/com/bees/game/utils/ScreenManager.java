@@ -25,8 +25,11 @@ public class ScreenManager {
     public void initialize(Game game) {
         this.game = game;
     }
-    /*
-    *
+
+    /**
+     * Permitir mostrar la pantalla correcta
+     * @param screenEnum pantalla a ser mostrada
+     * @param params parametros de la pantalla para poderse mostrar
      */
     public void showScreen(ScreenEnum screenEnum, Object... params) {
         Screen currentScreen = game.getScreen();

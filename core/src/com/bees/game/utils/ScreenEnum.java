@@ -9,7 +9,7 @@ import com.bees.game.presentacion.SelectionLevelScreen;
 import com.bees.game.presentacion.TutorialScreen;
 
 /**
- * Para gestionar las escenas, crearemos un tipo Enum de java, llamado ScreenEnum, con la lista de
+ * Clase tipo Enum permite gestionar las escenas con la lista de
  * pantallas disponibles. Además, el enumerado tiene un método getScreen() que utilizaremos para
  * obtener cada pantalla a partir de su tipo enumerado.
  *

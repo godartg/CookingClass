@@ -13,7 +13,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
  */
 
 public class UIFactory {
-
+    /**
+     * Crear Un boton
+     * @param texture imagen
+     * @return ImagenButton objeto anónimo
+     */
     public static ImageButton createButton(Texture texture) {
         return
                 new ImageButton(
@@ -21,13 +25,19 @@ public class UIFactory {
                                 new TextureRegion(texture) ) );
     }
 
-    public static InputListener createListener(final ScreenEnum dstScreen, final Object... params) {
+    /**
+     * Permite generar el evento para mostrar una nueva pantalla
+     * @param pantallaAMostrar pantalla que se va a mostrar
+     * @param parametrosDePantalla parametros que necesita el objeto pantalla
+     * @return devuelve un objeto anónimo tipo InputListener que permite mostrar la pantalla esperada
+     */
+    public static InputListener createListener(final ScreenEnum pantallaAMostrar, final Object... parametrosDePantalla) {
         return
                 new InputListener() {
                     @Override
                     public boolean touchDown(InputEvent event, float x,
                                              float y, int pointer, int button) {
-                        ScreenManager.getInstance().showScreen(dstScreen, params);
+                        ScreenManager.getInstance().showScreen(pantallaAMostrar, parametrosDePantalla);
                         return false;
                     }
                 };

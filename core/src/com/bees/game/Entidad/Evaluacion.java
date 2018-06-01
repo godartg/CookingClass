@@ -9,20 +9,26 @@ import com.bees.game.utils.ScreenManager;
  * Created by workaholic on 20/03/2018.
  */
 
-public class EEvaluacion {
-    private int EvaluacionId;
-    private int EvaluacionPuntaje;
-    private int EvaluacionTips;
+public class Evaluacion {
+    private int evaluacionId;
+    private int evaluacionPuntaje;
+    private int evaluacionTips;
 
-    public void EvaluarIngredientes(){
-
-    }
-    public void EvaluarPreparacion(){
+    public void evaluarIngredientes(){
 
     }
+    public void evaluarPreparacion(){
+
+    }
+
+
     public static class EvaluarListener extends ChangeListener {
-        EIngrediente leche, mantequilla, papa, sal;
-        public EvaluarListener(EIngrediente ingredienteLeche, EIngrediente ingredienteMantequilla, EIngrediente ingredientePapa, EIngrediente ingredienteSal){
+        Ingrediente leche, mantequilla, papa, sal;
+        /**
+         * Permite realizar el calculo del puntaje
+         * Permite ingresar ingredientes
+         */
+        public EvaluarListener(Ingrediente ingredienteLeche, Ingrediente ingredienteMantequilla, Ingrediente ingredientePapa, Ingrediente ingredienteSal){
             leche= ingredienteLeche;
             mantequilla=ingredienteMantequilla;
             papa= ingredientePapa;
@@ -31,7 +37,6 @@ public class EEvaluacion {
 
         @Override
         public void changed(ChangeEvent event, Actor actor) {
-            //Calcular puntaje del usuario
             int puntaje=0;
             if(leche.getestadoIngrediente()){
                 puntaje+=5;

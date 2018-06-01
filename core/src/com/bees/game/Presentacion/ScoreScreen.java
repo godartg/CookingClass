@@ -15,6 +15,7 @@ import net.dermetfan.gdx.assets.AnnotationAssetManager;
 
 
 /**
+ * Pantalla que permite ver el puntaje
  * @author Edwin César Condori Vilcapuma
  * @author Mauricio García Silva
  * Creado por Edwin César Condori Vilcapuma y Mauricio García Silva  20/03/2018.
