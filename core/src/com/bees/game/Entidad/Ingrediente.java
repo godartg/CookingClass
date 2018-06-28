@@ -15,7 +15,7 @@ public class Ingrediente extends Actor{
     private int idIngrediente;
     private String nombreIngrediente;
     private boolean estadoIngrediente;
-
+    private Texture ingredienteTexture;
 
     public boolean getestadoIngrediente() {
         return estadoIngrediente;
@@ -41,10 +41,6 @@ public class Ingrediente extends Actor{
     public void setnombreIngrediente(String nombreIngrediente) {
         this.nombreIngrediente = nombreIngrediente;
     }
-
-
-
-    private Texture ingredienteTexture;
 
     public Texture getIngredienteTexture() {
         return ingredienteTexture;

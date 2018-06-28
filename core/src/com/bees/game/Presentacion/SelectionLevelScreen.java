@@ -1,39 +1,43 @@
 package com.bees.game.presentacion;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.bees.game.assets.SelectionLevelAssets;
+import com.bees.game.utils.Constantes;
 import com.bees.game.utils.ScreenEnum;
 import com.bees.game.utils.ScreenManager;
+import com.bees.game.utils.UIFactory;
 
 import net.dermetfan.gdx.assets.AnnotationAssetManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
- * Pantalla que permite seleccionar los ingredientes
+ * Pantalla que permite seleccionar el platillo
  * @author Edwin César Condori Vilcapuma
  * @author Mauricio García Silva
  * Creado por Edwin César Condori Vilcapuma y Mauricio García Silva  20/03/2018.
  */
 
 public class SelectionLevelScreen extends BaseScreen{
-    private Image imagenFondo,imagenIngrediente1, imagenIngrediente2, imagenIngrediente3, imagenIngrediente4;
-    private Label lblTitulo;
-    private TextButton btnComenzar;
-    private Skin skin;
-    private CheckBox chIngrediente1,chIngrediente2,chIngrediente3, chIngrediente4;
+    private Image imagenFondo;
+    private ImageButton botonPlatillo0, botonPlatillo1;
+    private List<Object> platillosImagenes= new ArrayList<Object>();
     AnnotationAssetManager manager;
 
     public SelectionLevelScreen() {
         super();
+        Constantes constantes= new Constantes();
         manager= new AnnotationAssetManager();
+        platillosImagenes=constantes.getPlatillosImagenes();
         loadAssets();
 
     }
@@ -45,98 +49,35 @@ public class SelectionLevelScreen extends BaseScreen{
 
     @Override
     public void buildStage() {
-        Texture fondoPantalla = manager.get(SelectionLevelAssets.SUPERMARKET);
-        Texture mantequila= manager.get(SelectionLevelAssets.MANTEQUILLA);
-        Texture papa= manager.get(SelectionLevelAssets.POTATO);
-        Texture leche= manager.get(SelectionLevelAssets.LECHE);
-        Texture sal= manager.get(SelectionLevelAssets.SAL);
+        Texture fondoPantalla = manager.get(SelectionLevelAssets.FONDO_SELECCION);
+        Texture platillo0= manager.get((String) platillosImagenes.get(0));
+        Texture platillo1= manager.get((String) platillosImagenes.get(1));
 
-        //Importacion de los recursos para skins
-        skin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
-        //Creacion de estilo para el checkbox
-        CheckBox.CheckBoxStyle stle_chbox= skin.get(CheckBox.CheckBoxStyle.class);
-        //Crear los checbox indicando:Texto,estilo(skin)
-        chIngrediente1= new CheckBox(" Mantequilla",stle_chbox);
-        chIngrediente2= new CheckBox(" Papa",stle_chbox);
-        chIngrediente3= new CheckBox(" Leche",stle_chbox);
-        chIngrediente4= new CheckBox(" Sal",stle_chbox);
+        botonPlatillo0= UIFactory.createButton(platillo0);
+        botonPlatillo1= UIFactory.createButton(platillo1);
 
-        //Crear skin para label
-        Label.LabelStyle stle_label= skin.get("title",Label.LabelStyle.class);
-        lblTitulo = new Label("Ingredientes", stle_label);
-        //Crear skin para Textbutton
-        TextButton.TextButtonStyle style_btn= skin.get(TextButton.TextButtonStyle.class);
-        btnComenzar= new TextButton("Comenzar", style_btn);
-        //Indicar tamaño de los chbox
-        chIngrediente1.setSize(120,60);
-        chIngrediente2.setSize(120,60);
-        chIngrediente3.setSize(120,60);
-        chIngrediente4.setSize(120,60);
+        botonPlatillo0.addListener(UIFactory.createListener(ScreenEnum.GAME_SCREEN, 0)) ;
+        botonPlatillo1.addListener(UIFactory.createListener(ScreenEnum.GAME_SCREEN, 1));
 
-        //Indicar posicion de los chbox
-        chIngrediente1.setPosition(75,140);
-        chIngrediente2.setPosition(185,140);
-        chIngrediente3.setPosition(300,140);
-        chIngrediente4.setPosition(75,35);
-        //Label
-        lblTitulo.setSize(90,60);
-        lblTitulo.setPosition(275,300);
         imagenFondo= new Image(fondoPantalla);
         imagenFondo.setSize(640, 360);
         imagenFondo.setPosition(0, 0);
-        imagenIngrediente1= new Image(mantequila);
-        imagenIngrediente1.setSize(75, 75);
-        imagenIngrediente1.setPosition(80, 205);
-        imagenIngrediente2= new Image(papa);
-        imagenIngrediente2.setSize(75, 75);
-        imagenIngrediente2.setPosition(200, 205);
-        imagenIngrediente3= new Image(leche);
-        imagenIngrediente3.setSize(75, 75);
-        imagenIngrediente3.setPosition(320, 205);
-        imagenIngrediente4= new Image(sal);
-        imagenIngrediente4.setSize(75, 75);
-        imagenIngrediente4.setPosition(80, 85);
-        btnComenzar.setSize(120,60);
-        btnComenzar.setPosition(260,30);
+        botonPlatillo0.setSize(250,250);
+        botonPlatillo1.setSize(250,250);
 
+        botonPlatillo0.setPosition(90,50);
+        botonPlatillo1.setPosition(300,50);
 
         addActor(imagenFondo);
-        addActor(chIngrediente1);
-        addActor(chIngrediente2);
-        addActor(chIngrediente3);
-        addActor(chIngrediente4);
-        addActor(btnComenzar);
-        addActor(imagenIngrediente1);
-        addActor(imagenIngrediente2);
-        addActor(imagenIngrediente3);
-        addActor(imagenIngrediente4);
-        addActor(lblTitulo);
-        btnComenzar.addCaptureListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                String ingredientes="";
-                if(chIngrediente1.isChecked()){
-                    ingredientes+="1,";
-                }
-                if (chIngrediente2.isChecked()){
-                    ingredientes+="2,";
-                }
-                if (chIngrediente3.isChecked()){
-                    ingredientes+="3,";
-                }
-                if (chIngrediente4.isChecked()){
-                    ingredientes+="4,";
-                }
-                ScreenManager.getInstance().showScreen( ScreenEnum.GAME_SCREEN, ingredientes);
-            }
-        });
+        addActor(botonPlatillo0);
+        addActor(botonPlatillo1);
+
     }
 
 
     @Override
     public void dispose() {
         super.dispose();
-        skin.dispose();
         manager.dispose();
     }
 

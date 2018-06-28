@@ -40,7 +40,7 @@ public enum ScreenEnum {
     },
     GAME_SCREEN{
         public BaseScreen getScreen(Object... params){
-            return new GameScreen((String) params[0]);
+            return new GameScreen((Integer) params[0]);
         }
     },
     SCORE_SCREEN{

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.bees.game.assets.MenuAssets;
@@ -23,14 +24,17 @@ import net.dermetfan.gdx.assets.AnnotationAssetManager;
 public class MenuScreen extends BaseScreen{
 
     private Skin skin;
-    private Texture fondoPantalla;
+    private Texture fondoPantalla, imagenBotonJugar, imagenBotonTutorial, imagenBotonSalir;
     AnnotationAssetManager manager;
     public MenuScreen() {
         super();
         manager= new AnnotationAssetManager();
         loadAssets();
         skin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
-
+        fondoPantalla= manager.get(MenuAssets.PANTALLA_PRINCIPAL);
+        imagenBotonJugar= manager.get(MenuAssets.BOTON_JUGAR);
+        imagenBotonTutorial= manager.get(MenuAssets.BOTON_TUTORIAL);
+        imagenBotonSalir= manager.get(MenuAssets.BOTON_SALIR);
     }
 
     private void loadAssets() {
@@ -41,14 +45,15 @@ public class MenuScreen extends BaseScreen{
     @Override
     public void buildStage() {
         Image imagenFondo;
-        TextButton btnPlay, btnSalir;
-        fondoPantalla= manager.get(MenuAssets.COMIDAS);
-        btnPlay = new TextButton("Jugar", skin);
-        btnSalir = new TextButton("Salir", skin);
-        btnPlay.setSize(90, 100);
-        btnPlay.setPosition(40, 140);
-        btnSalir.setSize(90, 100);
-        btnSalir.setPosition(140, 140);
+        ImageButton btnPlay, btnTutorial, btnSalir;
+
+        btnPlay = UIFactory.createButton(imagenBotonJugar);
+        btnTutorial = UIFactory.createButton(imagenBotonTutorial);
+        btnSalir = UIFactory.createButton(imagenBotonSalir);
+        btnPlay.setSize(100, 120);
+        btnPlay.setPosition(150, 75);
+        btnSalir.setSize(100, 120);
+        btnSalir.setPosition(300, 75);
         imagenFondo= new Image(fondoPantalla);
         imagenFondo.setSize(640, 360);
         imagenFondo.setPosition(0, 0);

@@ -15,10 +15,7 @@ import net.dermetfan.gdx.assets.AnnotationAssetManager;
 public class SelectionLevelAssets {
     @AnnotationAssetManager.Asset(Texture.class)
     public static final String
-        SUPERMARKET = "recursos_imagenes/supermarket.png",
-        MANTEQUILLA="recursos_imagenes/butter.png",
-        LECHE="recursos_imagenes/milk.png",
-        POTATO="recursos_imagenes/potato.png",
-        SAL="recursos_imagenes/sal.png";
-
+        FONDO_SELECCION = "recursos_imagenes/pantallaSeleccion.png",
+        PURE_DE_PAPA="recursos_imagenes/platilloPurePapa.png",
+        PAPA_A_LA_HUANCAINA="recursos_imagenes/platilloPapaHuancaina.png";
 }

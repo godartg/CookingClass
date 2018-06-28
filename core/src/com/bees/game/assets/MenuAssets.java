@@ -14,6 +14,8 @@ import net.dermetfan.gdx.assets.AnnotationAssetManager;
 public class MenuAssets {
     @AnnotationAssetManager.Asset(Texture.class)
     public static final String
-        INTRO="recursos_imagenes/intro.jpg",
-        COMIDAS="recursos_imagenes/comidas1a.jpg";
+        PANTALLA_PRINCIPAL="recursos_imagenes/pantallaPrincipal.png",
+        BOTON_JUGAR="recursos_imagenes/botonJugar.png",
+        BOTON_TUTORIAL="recursos_imagenes/botonTutorial.png",
+        BOTON_SALIR="recursos_imagenes/botonSalir.png";
 }

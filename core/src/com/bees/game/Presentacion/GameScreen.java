@@ -3,21 +3,20 @@ package com.bees.game.presentacion;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.bees.game.assets.GameAssetsPlatillo0;
 import com.bees.game.entidad.Evaluacion;
 import com.bees.game.entidad.Ingrediente;
 import com.bees.game.entidad.LugarPreparacion;
 import com.bees.game.assets.GameAssets;
-
 import net.dermetfan.gdx.assets.AnnotationAssetManager;
-
 import java.util.ArrayList;
 import java.util.ListIterator;
-
 
 /**
  * Pantalla encargada de mostrar el proceso principal del juego
@@ -28,27 +27,27 @@ import java.util.ListIterator;
 
 public class GameScreen extends BaseScreen{
     private AnnotationAssetManager manager;
-    String ingredientes;
     private Label lblTitulo, lblLugarPrep;
     private Skin skin;
+    private Image imagenFondo;
     Ingrediente leche, papa, mantequilla,sal;
     LugarPreparacion lugarPreparacion;
     ImageButton btnizquierda, btnderecha, btnLugarPrep;
     private TextButton btnCocinar;
-    Texture lugarTexture,ollaTexture, posilloTexture, sartenTexture, tablaTexture;
+    Texture pantallaGame, lugarTexture,ollaTexture, posilloTexture, sartenTexture, tablaTexture;
     ArrayList<String> lugarArray = new ArrayList<String>();
     ArrayList<Texture> pathArray = new ArrayList<Texture>();
     ListIterator<String> llugar;
     ListIterator<Texture> lpath;
 
     /**
-     * @param ingredientes recibe una cadena con los ingredientes
+     * @param platilloNumero recibe un entero con el id del platillo
      */
-    public GameScreen(String ingredientes) {
+    public GameScreen(int platilloNumero) {
         super();
         manager= new AnnotationAssetManager();
         loadAssets();
-        this.ingredientes = ingredientes;
+
         skin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
         Label.LabelStyle stle_label= skin.get("title",Label.LabelStyle.class);
 
@@ -59,7 +58,7 @@ public class GameScreen extends BaseScreen{
         lugarArray.add("Posillo");
         lugarArray.add("Sarten");
         lugarArray.add("Tabla");
-
+        pantallaGame= manager.get(GameAssets.PANTALLA_COCINA);
         ollaTexture=manager.get(GameAssets.OLLA);
         posilloTexture= manager.get(GameAssets.POSILLO);
         sartenTexture= manager.get(GameAssets.SARTEN);
@@ -96,7 +95,6 @@ public class GameScreen extends BaseScreen{
                 }
             }
         });
-
         lblTitulo.setSize(90,60);
         lblTitulo.setPosition(120,300);
         lblLugarPrep.setSize(90,60);
@@ -105,7 +103,6 @@ public class GameScreen extends BaseScreen{
         btnderecha.setPosition(355,290);
         btnizquierda.setSize(49,49);
         btnizquierda.setPosition(570,290);
-
     }
 
     /**
@@ -118,16 +115,17 @@ public class GameScreen extends BaseScreen{
 
     @Override
     public void buildStage() {
-        lugarTexture = manager.get(GameAssets.OLLA);//
+        imagenFondo= new Image(pantallaGame);
+        lugarTexture = manager.get(GameAssets.OLLA);
         lugarPreparacion = new LugarPreparacion(lugarTexture,370,50);
         addActor(lugarPreparacion);
-        Texture lecheTexture=manager.get(GameAssets.LECHE);
+        Texture lecheTexture=manager.get(GameAssetsPlatillo0.LECHE);
         leche = new Ingrediente(lecheTexture,30,230);
-        Texture papaTexture=manager.get(GameAssets.POTATO);
+        Texture papaTexture=manager.get(GameAssetsPlatillo0.PAPA);
         papa = new Ingrediente(papaTexture,110,230);
-        Texture mantequillaTexture=manager.get(GameAssets.MANTEQUILLA);
+        Texture mantequillaTexture=manager.get(GameAssetsPlatillo0.MANTEQUILLA);
         mantequilla = new Ingrediente(mantequillaTexture,190,230);
-        Texture salTexture=manager.get(GameAssets.SAL);
+        Texture salTexture=manager.get(GameAssetsPlatillo0.SAL);
         sal = new Ingrediente(salTexture,30,150);
         leche.setestadoIngrediente(false);
         papa.setestadoIngrediente(false);
@@ -139,52 +137,25 @@ public class GameScreen extends BaseScreen{
         mantequilla.addListener(new Ingrediente.AgregarListener(mantequilla, lugarPreparacion));
         sal.addListener(new Ingrediente.AgregarListener(sal, lugarPreparacion));
 
-        boolean lecheexist=false,mantequillaexist=false,papaexist=false,salexist=false;
-        for (String dato : ingredientes.split(",")){
-            if(dato.equals("1")){
-                mantequillaexist=true;
-            }else{
-                if(dato.equals("2")){
-                    papaexist=true;
-                }else{
-                    if (dato.equals("3")){
-                        lecheexist=true;
-                    }else{
-                        if (dato.equals("4")){
-                            salexist= true;
-                        }
-                    }
-                }
-            }
-        }
-
-        if (mantequillaexist){
-            addActor(mantequilla);
-        }
-        if (papaexist){
-            addActor(papa);
-        }
-        if(lecheexist){
-            addActor(leche);
-        }
-        if(salexist){
-            addActor(sal);
-        }
+        addActor(leche);
+        addActor(papa);
+        addActor(mantequilla);
+        addActor(sal);
         TextButton.TextButtonStyle style_btn= skin.get(TextButton.TextButtonStyle.class);
         btnCocinar= new TextButton("Cocinar", style_btn);
         btnCocinar.setSize(120,60);
         btnCocinar.setPosition(280,30);
         btnCocinar.addCaptureListener(new Evaluacion.EvaluarListener(leche,mantequilla,papa,sal));
-
+        imagenFondo= new Image(pantallaGame);
+        imagenFondo.setSize(640, 360);
+        imagenFondo.setPosition(0, 0);
+        addActor(imagenFondo);
         addActor(lblTitulo);
         addActor(lblLugarPrep);
         addActor(btnderecha);
         addActor(btnizquierda);
         addActor(btnCocinar);
     }
-
-
-
 
     @Override
     public void hide() {
@@ -198,7 +169,5 @@ public class GameScreen extends BaseScreen{
         skin.dispose();
         manager.dispose();
     }
-
-
 
 }
