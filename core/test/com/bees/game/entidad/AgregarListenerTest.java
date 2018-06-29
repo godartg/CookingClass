@@ -17,12 +17,12 @@ import static org.junit.Assert.*;
  */
 public class AgregarListenerTest {
     Ingrediente ingrediente;
-    LugarPreparacion lugarPreparacion;
+    Utencilio utencilio;
 
     @Before
     public void setUp() throws Exception {
         ingrediente= new Ingrediente();
-        lugarPreparacion= new LugarPreparacion();
+        utencilio= new Utencilio();
 
     }
 
@@ -34,7 +34,7 @@ public class AgregarListenerTest {
     @Test
     public void touchUp() throws Exception {
 
-        if ((ingrediente.getX()>=lugarPreparacion.getX()&&ingrediente.getX()<=(lugarPreparacion.getX()+lugarPreparacion.getWidth()))&&(ingrediente.getY()>=lugarPreparacion.getY()&&ingrediente.getY()<=(lugarPreparacion.getY()+lugarPreparacion.getHeight()))){
+        if ((ingrediente.getX()>=utencilio.getX()&&ingrediente.getX()<=(utencilio.getX()+utencilio.getWidth()))&&(ingrediente.getY()>=utencilio.getY()&&ingrediente.getY()<=(utencilio.getY()+utencilio.getHeight()))){
             ingrediente.setestadoIngrediente(true);
         }
         assertEquals("El ingredient esta dentro del envase",true, ingrediente.getestadoIngrediente());

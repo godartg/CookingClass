@@ -32,7 +32,7 @@ public class ScoreScreen extends BaseScreen{
         super();
         manager= new AnnotationAssetManager();
         loadAssets();
-        fondoPantalla= manager.get(ScoreAssets.PUNTUACION);
+        fondoPantalla= manager.get(ScoreAssets.FONDO_DE_PANTALLA);
         fondo_pantalla= new Image(fondoPantalla);
         fondo_pantalla.setSize(640, 360);
         fondo_pantalla.setPosition(0, 0);

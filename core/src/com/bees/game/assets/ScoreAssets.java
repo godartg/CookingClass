@@ -14,6 +14,6 @@ import net.dermetfan.gdx.assets.AnnotationAssetManager;
 public class ScoreAssets {
     @AnnotationAssetManager.Asset(Texture.class)
     public static final String
-    PUNTUACION="recursos_imagenes/puntuacion.png";
+    FONDO_DE_PANTALLA="recursos_imagenes/pantallaTutorialPuntaje.png";
 
 }

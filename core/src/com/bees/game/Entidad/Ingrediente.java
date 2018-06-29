@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
  */
 
 public class Ingrediente extends Actor{
-    private int idIngrediente;
+    private int id;
     private String nombreIngrediente;
     private boolean estadoIngrediente;
     private Texture ingredienteTexture;
@@ -26,12 +26,12 @@ public class Ingrediente extends Actor{
     }
 
     public int getidIngrediente() {
-        return idIngrediente;
+        return id;
     }
 
 
     public void setidIngrediente(int idIngrediente) {
-        this.idIngrediente = idIngrediente;
+        this.id = idIngrediente;
     }
 
     public String getnombreIngrediente() {
@@ -46,11 +46,13 @@ public class Ingrediente extends Actor{
         return ingredienteTexture;
     }
 
-    public void setIngredienteTexture(Texture ingredienteTexture) {
+    public void setIngredienteTexture( Texture ingredienteTexture) {
         this.ingredienteTexture = ingredienteTexture;
-    }
-    public Ingrediente(){
 
+    }
+    public Ingrediente(int idIngrediente,Texture texture){
+        this.ingredienteTexture = texture;
+        this.id= idIngrediente;
     }
 
     public Ingrediente(Texture texture, float x, float y){
@@ -58,7 +60,9 @@ public class Ingrediente extends Actor{
         setBounds(x, y,75,75);
 
     }
+    public Ingrediente(){
 
+    }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
@@ -75,10 +79,10 @@ public class Ingrediente extends Actor{
         float dx;
         float dy;
         Ingrediente ingrediente;
-        LugarPreparacion lugarPreparacion;
-        public AgregarListener(Ingrediente ingredienteActual, LugarPreparacion lugarPreparacion){
+        Utencilio utencilio;
+        public AgregarListener(Ingrediente ingredienteActual, Utencilio utencilio){
             ingrediente=ingredienteActual ;
-            this.lugarPreparacion = lugarPreparacion;
+            this.utencilio = utencilio;
         }
 
          public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -101,7 +105,7 @@ public class Ingrediente extends Actor{
          *  En caso de que halla colisión entre las coordenadas (x y) del evento y lugar de platillo el ingrediente será visible y su estado false
          */
         public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-            if ((ingrediente.getX() >= lugarPreparacion.getX() && ingrediente.getX() <= (lugarPreparacion.getX() + lugarPreparacion.getWidth())) && (ingrediente.getY() >= lugarPreparacion.getY() && ingrediente.getY() <= (lugarPreparacion.getY() + lugarPreparacion.getHeight()))) {
+            if ((ingrediente.getX() >= utencilio.getX() && ingrediente.getX() <= (utencilio.getX() + utencilio.getWidth())) && (ingrediente.getY() >= utencilio.getY() && ingrediente.getY() <= (utencilio.getY() + utencilio.getHeight()))) {
                 ingrediente.setVisible(false);
                 ingrediente.setestadoIngrediente(true);
             } else {

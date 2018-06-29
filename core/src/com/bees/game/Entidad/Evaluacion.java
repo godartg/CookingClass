@@ -26,16 +26,8 @@ public class Evaluacion {
 
     }
 
-    /**
-     *
-     * @return
-     */
-    public List<List<String>> obtenerPuntaje(){
-        List<List<String>> listaPuntajes= new ArrayList<List<String>>();
-        return listaPuntajes;
-    }
 
-    /**
+    /**Comparar las listas de procedimiento del resultado actual contra el esperado
      *
      * @param numeroPlatillo
      * @param preparacion
@@ -43,10 +35,11 @@ public class Evaluacion {
      */
     public double evaluarPartida(int numeroPlatillo, List<List<String>> preparacion){
         double resultado=0;
+
         return resultado;
     }
 
-    /**
+    /**Guardar puntaje en un fichero
      *
      * @param puntaje
      * @param nombreJugador
@@ -57,15 +50,16 @@ public class Evaluacion {
 
     public static class EvaluarListener extends ChangeListener {
         Ingrediente leche, mantequilla, papa, sal;
+        double porcentajeDeExito;
         /**
          * Permite realizar el calculo del puntaje
          * Permite ingresar ingredientes
          */
-        public EvaluarListener(Ingrediente ingredienteLeche, Ingrediente ingredienteMantequilla, Ingrediente ingredientePapa, Ingrediente ingredienteSal){
-            leche= ingredienteLeche;
-            mantequilla=ingredienteMantequilla;
-            papa= ingredientePapa;
-            sal= ingredienteSal;
+        public EvaluarListener(Ingrediente ingredienteLeche, Ingrediente ingredienteMantequilla, Ingrediente ingredientePapa, Ingrediente ingredienteSal) {
+            leche = ingredienteLeche;
+            mantequilla = ingredienteMantequilla;
+            papa = ingredientePapa;
+            sal = ingredienteSal;
         }
 
         @Override

@@ -10,10 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.bees.game.assets.GameAssetsPlatillo0;
+import com.bees.game.assets.GameAssetsPlatillo1;
 import com.bees.game.entidad.Evaluacion;
 import com.bees.game.entidad.Ingrediente;
-import com.bees.game.entidad.LugarPreparacion;
 import com.bees.game.assets.GameAssets;
+import com.bees.game.entidad.Utencilio;
+import com.bees.game.utils.Constantes;
+import com.bees.game.utils.EntityFactory;
+
 import net.dermetfan.gdx.assets.AnnotationAssetManager;
 import java.util.ArrayList;
 import java.util.ListIterator;
@@ -30,15 +34,24 @@ public class GameScreen extends BaseScreen{
     private Label lblTitulo, lblLugarPrep;
     private Skin skin;
     private Image imagenFondo;
+    ImageButton btnizquierda, btnderecha;
     Ingrediente leche, papa, mantequilla,sal;
-    LugarPreparacion lugarPreparacion;
-    ImageButton btnizquierda, btnderecha, btnLugarPrep;
     private TextButton btnCocinar;
     Texture pantallaGame, lugarTexture,ollaTexture, posilloTexture, sartenTexture, tablaTexture;
     ArrayList<String> lugarArray = new ArrayList<String>();
     ArrayList<Texture> pathArray = new ArrayList<Texture>();
     ListIterator<String> llugar;
     ListIterator<Texture> lpath;
+    /**
+    List<Ingrediente> ingredientes;
+    List<String> nombreUtencilios;
+    List<String> imagenesDeUtencilios;
+    List<Texture> texturasDeUtencilios;
+    ListIterator<String> listaNombre;
+    ListIterator<Texture> listaTextura;
+     **/
+    Utencilio utencilio, utencilioPlato;
+    EntityFactory entityFactory;
 
     /**
      * @param platilloNumero recibe un entero con el id del platillo
@@ -46,14 +59,10 @@ public class GameScreen extends BaseScreen{
     public GameScreen(int platilloNumero) {
         super();
         manager= new AnnotationAssetManager();
-        loadAssets();
 
-        skin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
-        Label.LabelStyle stle_label= skin.get("title",Label.LabelStyle.class);
-
-        ImageButton.ImageButtonStyle stle_btn= skin.get("left", ImageButton.ImageButtonStyle.class);
-        ImageButton.ImageButtonStyle stle_btn1= skin.get("right", ImageButton.ImageButtonStyle.class);
-
+        loadAssets(platilloNumero);
+        entityFactory= new EntityFactory(manager);
+        //ingredientes= getIngredientes(platilloNumero);
         lugarArray.add("Olla");
         lugarArray.add("Posillo");
         lugarArray.add("Sarten");
@@ -70,6 +79,27 @@ public class GameScreen extends BaseScreen{
         llugar= lugarArray.listIterator();
         lpath= pathArray.listIterator();
 
+        Constantes constantes= new Constantes();
+
+        skin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
+        Label.LabelStyle stle_label= skin.get("title",Label.LabelStyle.class);
+
+        ImageButton.ImageButtonStyle stle_btn= skin.get("left", ImageButton.ImageButtonStyle.class);
+        ImageButton.ImageButtonStyle stle_btn1= skin.get("right", ImageButton.ImageButtonStyle.class);
+/**
+        nombreUtencilios= constantes.getUtenciliosNombre();
+        imagenesDeUtencilios= constantes.getUtenciliosImagen();
+
+        utencilio= entityFactory.crearUtencilio(0,imagenesDeUtencilios.get(0),370,50);
+
+        listaNombre= nombreUtencilios.listIterator();
+        for(String imagenUtencilio: imagenesDeUtencilios){
+            Texture texture= manager.get(imagenUtencilio);
+            texturasDeUtencilios.add( texture);
+        }
+        listaTextura=  texturasDeUtencilios.listIterator();
+*/
+
         lblTitulo = new Label("Ingredientes", stle_label);
         lblLugarPrep = new Label("Olla", stle_label);
         btnderecha= new ImageButton(stle_btn);
@@ -80,21 +110,21 @@ public class GameScreen extends BaseScreen{
             public void changed(ChangeEvent event, Actor actor) {
                 if(llugar.hasPrevious()){
                     lblLugarPrep.setText(llugar.previous());
-                    lugarPreparacion.setTexture(lpath.previous());
-                }else{
+                    utencilio.setImagen(lpath.previous());
                 }
-
             }
         });
         btnizquierda.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+
                 if(llugar.hasNext()){
                     lblLugarPrep.setText(llugar.next());
-                    lugarPreparacion.setTexture(lpath.next());
+                    utencilio.setImagen(lpath.next());
                 }
             }
         });
+
         lblTitulo.setSize(90,60);
         lblTitulo.setPosition(120,300);
         lblLugarPrep.setSize(90,60);
@@ -108,17 +138,30 @@ public class GameScreen extends BaseScreen{
     /**
      * Cargar los recursos como imagenes y audios
      */
-    private void loadAssets() {
+    private void loadAssets(int idPlatillo) {
         manager.load(GameAssets.class);
+        switch (idPlatillo){
+            case 0:
+                manager.load(GameAssetsPlatillo0.class);
+                break;
+            case 1:
+                manager.load(GameAssetsPlatillo1.class);
+                break;
+        }
         manager.finishLoading();
     }
 
     @Override
     public void buildStage() {
+        pantallaGame= manager.get(GameAssets.PANTALLA_COCINA);
         imagenFondo= new Image(pantallaGame);
+        imagenFondo.setSize(640, 360);
+        imagenFondo.setPosition(0, 0);
+
+        addActor(imagenFondo);
         lugarTexture = manager.get(GameAssets.OLLA);
-        lugarPreparacion = new LugarPreparacion(lugarTexture,370,50);
-        addActor(lugarPreparacion);
+        utencilio = new Utencilio(0,lugarTexture,370,50);
+        addActor(utencilio);
         Texture lecheTexture=manager.get(GameAssetsPlatillo0.LECHE);
         leche = new Ingrediente(lecheTexture,30,230);
         Texture papaTexture=manager.get(GameAssetsPlatillo0.PAPA);
@@ -132,24 +175,33 @@ public class GameScreen extends BaseScreen{
         mantequilla.setestadoIngrediente(false);
         sal.setestadoIngrediente(false);
 
-        leche.addListener(new Ingrediente.AgregarListener(leche, lugarPreparacion));
-        papa.addListener(new Ingrediente.AgregarListener(papa, lugarPreparacion));
-        mantequilla.addListener(new Ingrediente.AgregarListener(mantequilla, lugarPreparacion));
-        sal.addListener(new Ingrediente.AgregarListener(sal, lugarPreparacion));
+        leche.addListener(new Ingrediente.AgregarListener(leche, utencilio));
+        papa.addListener(new Ingrediente.AgregarListener(papa, utencilio));
+        mantequilla.addListener(new Ingrediente.AgregarListener(mantequilla, utencilio));
+        sal.addListener(new Ingrediente.AgregarListener(sal, utencilio));
 
         addActor(leche);
         addActor(papa);
         addActor(mantequilla);
         addActor(sal);
+        /**
+        int posicionInicialX=30;
+        int posicionInicialY=150;
+        for(Ingrediente ingrediente: ingredientes){
+            posicionInicialX+=90;
+            posicionInicialY+=80;
+           ingrediente.setPosition(posicionInicialX, posicionInicialY);
+            ingrediente.setestadoIngrediente(true);
+            addActor(ingrediente);
+        }
+        */
+
         TextButton.TextButtonStyle style_btn= skin.get(TextButton.TextButtonStyle.class);
         btnCocinar= new TextButton("Cocinar", style_btn);
         btnCocinar.setSize(120,60);
         btnCocinar.setPosition(280,30);
         btnCocinar.addCaptureListener(new Evaluacion.EvaluarListener(leche,mantequilla,papa,sal));
-        imagenFondo= new Image(pantallaGame);
-        imagenFondo.setSize(640, 360);
-        imagenFondo.setPosition(0, 0);
-        addActor(imagenFondo);
+
         addActor(lblTitulo);
         addActor(lblLugarPrep);
         addActor(btnderecha);

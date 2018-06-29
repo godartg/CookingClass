@@ -5,6 +5,7 @@ import com.bees.game.assets.GameAssets;
 import com.bees.game.assets.GameAssetsPlatillo0;
 import com.bees.game.assets.GameAssetsPlatillo1;
 import com.bees.game.assets.SelectionLevelAssets;
+import com.bees.game.entidad.Ingrediente;
 import com.bees.game.entidad.Utencilio;
 
 import java.util.ArrayList;
@@ -18,9 +19,9 @@ import java.util.List;
  */
 
 public final class Constantes {
-    private static final List<List<Object>> UTENCILIOS= new ArrayList<List<Object>>(){{
-        add(new ArrayList<Object>());
-        add(new ArrayList<Object>());
+    private static final List<List<String>> UTENCILIOS= new ArrayList<List<String>>(){{
+        add(new ArrayList<String>());
+        add(new ArrayList<String>());
         get(0).add("Olla");
         get(1).add(GameAssets.OLLA);
         get(0).add("Posillo");
@@ -90,113 +91,124 @@ public final class Constantes {
     private static final List<List<Object>> INGREDIENTES= new ArrayList<List<Object>>(){{
         add(new ArrayList<Object>());
         add(new ArrayList<Object>());
-        get(0).add("papa");
+        get(0).add("papa");//0
         get(1).add(GameAssetsPlatillo0.PAPA);
-        get(0).add("papa cocida");
+        get(0).add("papa cocida");//1
         get(1).add(GameAssetsPlatillo0.PAPA_COCIDA);
-        get(0).add("papa aplastada");
+        get(0).add("papa aplastada");//2
         get(1).add(GameAssetsPlatillo0.PAPA_APLASTADA);
-        get(0).add("papa frita");
+        get(0).add("papa frita");//3
         get(1).add(GameAssetsPlatillo0.PAPA_FRITA);
-        get(0).add("papa cortada");
+        get(0).add("papa cortada");//4
         get(1).add(GameAssetsPlatillo0.PAPA_CORTADA);
-        get(0).add("papa licuada");
+        get(0).add("papa licuada");//5
         get(1).add(GameAssetsPlatillo0.PAPA_LICUADA);
-        get(0).add("leche");
+        get(0).add("leche");//6
         get(1).add(GameAssetsPlatillo0.LECHE);
-        get(0).add("leche caliente");
+        get(0).add("leche caliente");//7
         get(1).add(GameAssetsPlatillo0.LECHE_CALIENTE);
-        get(0).add("leche posillo");
+        get(0).add("leche posillo");//8
         get(1).add(GameAssetsPlatillo0.LECHE_POSILLO);
-        get(0).add("leche frita");
+        get(0).add("leche frita");//9
         get(1).add(GameAssetsPlatillo0.LECHE_FRITA);
-        get(0).add("leche licuado");
+        get(0).add("leche licuado");//10
         get(1).add(GameAssetsPlatillo0.LECHE_LICUADA);
-        get(0).add("mantequilla");
+        get(0).add("mantequilla");//11
         get(1).add(GameAssetsPlatillo0.MANTEQUILLA);
-        get(0).add("mantequilla derretida");
+        get(0).add("mantequilla derretida");//12
         get(1).add(GameAssetsPlatillo0.MANTEQUILLA_DERRETIDA);
-        get(0).add("mantequilla aplastada");
+        get(0).add("mantequilla aplastada");//13
         get(1).add(GameAssetsPlatillo0.MANTEQUILLA_APLASTADA);
-        get(0).add("mantequilla frita");
+        get(0).add("mantequilla frita");//14
         get(1).add(GameAssetsPlatillo0.MANTEQUILLA_FRITA);
-        get(0).add("mantequilla picada");
+        get(0).add("mantequilla picada");//15
         get(1).add(GameAssetsPlatillo0.MANTEQUILLA_PICADA);
-        get(0).add("mantequilla licuada");
+        get(0).add("mantequilla licuada");//16
         get(1).add(GameAssetsPlatillo0.MANTEQUILLA_LICUADA);
-        get(0).add("sal");
+        get(0).add("sal");//17
         get(1).add(GameAssetsPlatillo0.SAL);
-        get(0).add("ají");
+        get(0).add("ají");//18
         get(1).add(GameAssetsPlatillo1.AJI);
-        get(0).add("ají cocido");
+        get(0).add("ají cocido");//19
         get(1).add(GameAssetsPlatillo1.AJI_COCIDO);
-        get(0).add("ají aplastado");
+        get(0).add("ají aplastado");//20
         get(1).add(GameAssetsPlatillo1.AJI_APLASTADO);
-        get(0).add("ají frito");
+        get(0).add("ají frito");//21
         get(1).add(GameAssetsPlatillo1.AJI_FRITO);
-        get(0).add("ají picado");
+        get(0).add("ají picado");//22
         get(1).add(GameAssetsPlatillo1.AJI_PICADO);
-        get(0).add("ají licuado");
+        get(0).add("ají licuado");//23
         get(1).add(GameAssetsPlatillo1.AJI_LICUADO);
-        get(0).add("queso");
+        get(0).add("queso");//24
         get(1).add(GameAssetsPlatillo1.QUESO);
-        get(0).add("queso cocido");
+        get(0).add("queso cocido");//25
         get(1).add(GameAssetsPlatillo1.QUESO_COCIDO);
-        get(0).add("queso aplastado");
+        get(0).add("queso aplastado");//26
         get(1).add(GameAssetsPlatillo1.QUESO_APLASTADO);
-        get(0).add("queso frito");
+        get(0).add("queso frito");//27
         get(1).add(GameAssetsPlatillo1.QUESO_FRITO);
-        get(0).add("queso picado");
+        get(0).add("queso picado");//28
         get(1).add(GameAssetsPlatillo1.QUESO_PICADO);
-        get(0).add("queso licuado");
+        get(0).add("queso licuado");//29
         get(1).add(GameAssetsPlatillo1.QUESO_LICUADO);
-        get(0).add("huevo");
+        get(0).add("huevo");//30
         get(1).add(GameAssetsPlatillo1.HUEVO);
-        get(0).add("huevo cocido");
+        get(0).add("huevo cocido");//31
         get(1).add(GameAssetsPlatillo1.HUEVO_COCIDO);
-        get(0).add("huevo aplastado");
+        get(0).add("huevo aplastado");//32
         get(1).add(GameAssetsPlatillo1.HUEVO_APLASTADO);
-        get(0).add("huevo frito");
+        get(0).add("huevo frito");//33
         get(1).add(GameAssetsPlatillo1.HUEVO_FRITO);
-        get(0).add("huevo picado");
+        get(0).add("huevo picado");//34
         get(1).add(GameAssetsPlatillo1.HUEVO_PICADO);
-        get(0).add("huevo frito");
+        get(0).add("huevo frito");//35
         get(1).add(GameAssetsPlatillo1.HUEVO_LICUADO);
-        get(0).add("aceituna");
+        get(0).add("aceituna");//36
         get(1).add(GameAssetsPlatillo1.ACEITUNA);
-        get(0).add("aceituna codida");
+        get(0).add("aceituna codida");//37
         get(1).add(GameAssetsPlatillo1.ACEITUNA_COCIDA);
-        get(0).add("aceituna aplastada");
+        get(0).add("aceituna aplastada");//38
         get(1).add(GameAssetsPlatillo1.ACEITUNA_APLASTADA);
-        get(0).add("aceituna frita");
+        get(0).add("aceituna frita");//39
         get(1).add(GameAssetsPlatillo1.ACEITUNA_FRITA);
-        get(0).add("aceituna picada");
+        get(0).add("aceituna picada");//40
         get(1).add(GameAssetsPlatillo1.ACEITUNA_PICADA);
-        get(0).add("aceituna licuada");
+        get(0).add("aceituna licuada");//41
         get(1).add(GameAssetsPlatillo1.ACEITUNA_LICUADA);
-        get(0).add("lechuga");
+        get(0).add("lechuga");//42
         get(1).add(GameAssetsPlatillo1.LECHUGA);
-        get(0).add("lechuga cocida");
+        get(0).add("lechuga cocida");//43
         get(1).add(GameAssetsPlatillo1.LECHUGA_COCIDA);
-        get(0).add("lechuga aplastada");
+        get(0).add("lechuga aplastada");//44
         get(1).add(GameAssetsPlatillo1.LECHUGA_APLASTADA);
-        get(0).add("lechuga frita");
+        get(0).add("lechuga frita");//45
         get(1).add(GameAssetsPlatillo1.LECHUGA_FRITA);
-        get(0).add("lechuga cortada");
+        get(0).add("lechuga cortada");//46
         get(1).add(GameAssetsPlatillo1.LECHUGA_CORTADA);
-        get(0).add("lechuga licuada");
+        get(0).add("lechuga licuada");//47
         get(1).add(GameAssetsPlatillo1.LECHUGA_LICUADA);
-        get(0).add("mezcla blanca");
+        get(0).add("mezcla blanca");//48
         get(1).add(GameAssetsPlatillo0.MEZCLA_BLANCA);
-        get(0).add("mezcla amarilla");
+        get(0).add("mezcla amarilla");//49
         get(1).add(GameAssetsPlatillo0.MEZCLA_AMARILLA);
 
     }};
     public Constantes(){
 
     }
-    public List<List<Object>> getUtencilios() {
-        return UTENCILIOS;
+    public List<String> getUtenciliosNombre() {
+        List<String> listaUtencilios= new ArrayList<String>();
+        for(String utencilio: UTENCILIOS.get(0)){
+            listaUtencilios.add( utencilio);
+        }
+        return listaUtencilios;
+    }
+    public List<String> getUtenciliosImagen() {
+        List<String> listaUtencilios= new ArrayList<String>();
+        for(String utencilio: UTENCILIOS.get(1)){
+            listaUtencilios.add( utencilio);
+        }
+        return listaUtencilios;
     }
 
     public List<List<Object>> getPlatillos() {
@@ -210,8 +222,5 @@ public final class Constantes {
     public List<List<Object>> getIngredientes() {
         return INGREDIENTES;
     }
-    public List<List<Object>> getIngredientes(int idPlatillo) {
 
-        return INGREDIENTES;
-    }
 }
