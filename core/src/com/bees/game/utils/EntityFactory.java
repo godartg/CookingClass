@@ -55,7 +55,7 @@ public class EntityFactory {
     private List<Ingrediente> getIngredientes(int idPlatillo) {
         List<Ingrediente> listaIngredientes= new ArrayList<Ingrediente>();
         Constantes constantes= new Constantes();
-        List<List<Object>> ingredientes = constantes.getIngredientes();
+        List<List<String>> ingredientesNombres = constantes.getIngredientesNombres();
         switch (idPlatillo){
             case 0:
                 listaIngredientes.add( crearIngrediente(6, GameAssetsPlatillo0.LECHE));
@@ -64,12 +64,12 @@ public class EntityFactory {
                 listaIngredientes.add( crearIngrediente(17, GameAssetsPlatillo0.SAL));
                 break;
             case 1:
-                listaIngredientes.add( crearIngrediente(18, (String) ingredientes.get(1).get(18)));
-                listaIngredientes.add( crearIngrediente(24, (String) ingredientes.get(1).get(24)));
-                listaIngredientes.add( crearIngrediente(30, (String) ingredientes.get(1).get(30)));
-                listaIngredientes.add( crearIngrediente(36, (String) ingredientes.get(1).get(36)));
-                listaIngredientes.add( crearIngrediente(0, (String) ingredientes.get(1).get(0)));
-                listaIngredientes.add( crearIngrediente(42, (String) ingredientes.get(1).get(42)));
+                listaIngredientes.add( crearIngrediente(18, ingredientesNombres.get(1).get(18)));
+                listaIngredientes.add( crearIngrediente(24, ingredientesNombres.get(1).get(24)));
+                listaIngredientes.add( crearIngrediente(30, ingredientesNombres.get(1).get(30)));
+                listaIngredientes.add( crearIngrediente(36, ingredientesNombres.get(1).get(36)));
+                listaIngredientes.add( crearIngrediente(0, ingredientesNombres.get(1).get(0)));
+                listaIngredientes.add( crearIngrediente(42, ingredientesNombres.get(1).get(42)));
                 break;
         }
 

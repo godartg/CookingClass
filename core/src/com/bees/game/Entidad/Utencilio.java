@@ -5,6 +5,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.bees.game.utils.Constantes;
+
+import net.dermetfan.gdx.assets.AnnotationAssetManager;
+
+import java.util.List;
 
 /**
  * Created by workaholic on 22/06/2018.
@@ -14,7 +19,8 @@ public class Utencilio extends Actor{
     private int id;
     private String nombre;
     private Texture imagen;
-
+    private Constantes constantes;
+    private AnnotationAssetManager manager;
     public int getId() {
         return id;
     }
@@ -31,6 +37,13 @@ public class Utencilio extends Actor{
         this.imagen = imagen;
     }
 
+    public Utencilio(AnnotationAssetManager manager, int idUtencilio, Texture texture, float posicionX, float posicionY){
+        this.imagen = texture;
+        this.id=idUtencilio;
+        setBounds(posicionX, posicionY,230,230);
+        constantes= new Constantes();
+        this.manager = manager;
+    }
     public Utencilio(int idUtencilio, Texture texture, float posicionX, float posicionY){
         this.imagen = texture;
         this.id=idUtencilio;
@@ -48,6 +61,18 @@ public class Utencilio extends Actor{
     public void setVisible(boolean visible) {
         super.setVisible(visible);
     }
+
+    public void preparar(Ingrediente ingrediente) {
+        if(ingrediente.getidIngrediente()==3){
+            ingrediente.setVisible(false);
+        }else{
+            List<List<String>> ingredientes= constantes.getIngredientesImagenes();
+            Texture texture= manager.get(ingredientes.get(ingrediente.getidIngrediente()).get(id));
+            ingrediente.setIngredienteTexture(texture);
+        }
+
+    }
+
     public static class AgregarListenerUtencilio extends InputListener {
         float altura = 75 / 2;
         float touchDown_x;
@@ -61,19 +86,7 @@ public class Utencilio extends Actor{
             this.utencilio = utencilio;
         }
 
-        public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-            //Hallar posición del objeto
-            touchDown_x = x;
-            touchDown_y = altura - y;
-            return true;
-        }
 
-        public void touchDragged(InputEvent event, float x, float y, int pointer) {
-            //Mover el objeto
-            dx = ingrediente.getX() - touchDown_x;
-            dy = ingrediente.getY() - altura  + touchDown_y;
-            ingrediente.setPosition(x + dx, y + dy);
-        }
 
         /**
          * Verificar colisión entre ingrediente y lugar de preparación
@@ -85,7 +98,7 @@ public class Utencilio extends Actor{
                 ingrediente.setVisible(false);
                 ingrediente.setestadoIngrediente(true);
             } else {
-                ingrediente.setPosition(30, 230);
+                ingrediente.setPosition(ingrediente.getPosicionInicialX(), ingrediente.getPosicionInicialY());
             }
 
         }
