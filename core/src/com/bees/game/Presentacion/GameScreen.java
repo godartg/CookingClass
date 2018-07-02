@@ -20,6 +20,7 @@ import com.bees.game.utils.EntityFactory;
 
 import net.dermetfan.gdx.assets.AnnotationAssetManager;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ListIterator;
 
 /**
@@ -42,6 +43,7 @@ public class GameScreen extends BaseScreen{
     ArrayList<Texture> pathArray = new ArrayList<Texture>();
     ListIterator<String> llugar;
     ListIterator<Texture> lpath;
+    Constantes constantes;
     /**
     List<Ingrediente> ingredientes;
     List<String> nombreUtencilios;
@@ -79,7 +81,7 @@ public class GameScreen extends BaseScreen{
         llugar= lugarArray.listIterator();
         lpath= pathArray.listIterator();
 
-        Constantes constantes= new Constantes();
+        constantes= new Constantes();
 
         skin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
         Label.LabelStyle stle_label= skin.get("title",Label.LabelStyle.class);
@@ -109,8 +111,10 @@ public class GameScreen extends BaseScreen{
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if(llugar.hasPrevious()){
+                    int idUtencilio= utencilio.getId();
                     lblLugarPrep.setText(llugar.previous());
                     utencilio.setImagen(lpath.previous());
+                    utencilio.setId(idUtencilio-1);
                 }
             }
         });
@@ -119,8 +123,10 @@ public class GameScreen extends BaseScreen{
             public void changed(ChangeEvent event, Actor actor) {
 
                 if(llugar.hasNext()){
+                    int idUtencilio= utencilio.getId();
                     lblLugarPrep.setText(llugar.next());
                     utencilio.setImagen(lpath.next());
+                    utencilio.setId(idUtencilio+1);
                 }
             }
         });
@@ -153,6 +159,7 @@ public class GameScreen extends BaseScreen{
 
     @Override
     public void buildStage() {
+        List<List<Integer>> posicionesCocina=constantes.getPOSICIONES_COCINA();
         pantallaGame= manager.get(GameAssets.PANTALLA_COCINA);
         imagenFondo= new Image(pantallaGame);
         imagenFondo.setSize(640, 360);
@@ -160,16 +167,16 @@ public class GameScreen extends BaseScreen{
 
         addActor(imagenFondo);
         lugarTexture = manager.get(GameAssets.OLLA);
-        utencilio = new Utencilio(0,lugarTexture,370,50);
+        utencilio = new Utencilio(manager,0,lugarTexture,370,50);
         addActor(utencilio);
         Texture lecheTexture=manager.get(GameAssetsPlatillo0.LECHE);
-        leche = new Ingrediente(lecheTexture,30,230);
+        leche = new Ingrediente(1,lecheTexture,posicionesCocina.get(0).get(0),posicionesCocina.get(0).get(1));
         Texture papaTexture=manager.get(GameAssetsPlatillo0.PAPA);
-        papa = new Ingrediente(papaTexture,110,230);
+        papa = new Ingrediente( 0,papaTexture,posicionesCocina.get(1).get(0),posicionesCocina.get(1).get(1));
         Texture mantequillaTexture=manager.get(GameAssetsPlatillo0.MANTEQUILLA);
-        mantequilla = new Ingrediente(mantequillaTexture,190,230);
+        mantequilla = new Ingrediente(2,mantequillaTexture,posicionesCocina.get(2).get(0),posicionesCocina.get(2).get(1));
         Texture salTexture=manager.get(GameAssetsPlatillo0.SAL);
-        sal = new Ingrediente(salTexture,30,150);
+        sal = new Ingrediente(3,salTexture,posicionesCocina.get(3).get(0),posicionesCocina.get(3).get(1));
         leche.setestadoIngrediente(false);
         papa.setestadoIngrediente(false);
         mantequilla.setestadoIngrediente(false);
