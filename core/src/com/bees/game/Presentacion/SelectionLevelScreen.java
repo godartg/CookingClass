@@ -57,7 +57,7 @@ public class SelectionLevelScreen extends BaseScreen{
         botonPlatillo1= UIFactory.createButton(platillo1);
 
         botonPlatillo0.addListener(UIFactory.createListener(ScreenEnum.GAME_SCREEN, 0)) ;
-        botonPlatillo1.addListener(UIFactory.createListener(ScreenEnum.GAME_SCREEN, 1));
+        //botonPlatillo1.addListener(UIFactory.createListener(ScreenEnum.GAME_SCREEN, 1));
 
         imagenFondo= new Image(fondoPantalla);
         imagenFondo.setSize(640, 360);

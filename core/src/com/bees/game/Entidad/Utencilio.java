@@ -9,6 +9,7 @@ import com.bees.game.utils.Constantes;
 
 import net.dermetfan.gdx.assets.AnnotationAssetManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +25,6 @@ public class Utencilio extends Actor{
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -62,45 +62,31 @@ public class Utencilio extends Actor{
         super.setVisible(visible);
     }
 
-    public void preparar(Ingrediente ingrediente) {
-        if(ingrediente.getidIngrediente()==3){
+    public void preparar(List<String> preparacion, Ingrediente ingrediente) {
+        if(ingrediente.getIdIngrediente()==3){
             ingrediente.setVisible(false);
+            preparacion.add(3+","+0+","+this.getId());
         }else{
             List<List<String>> ingredientes= constantes.getIngredientesImagenes();
-            Texture texture= manager.get(ingredientes.get(ingrediente.getidIngrediente()).get(id));
+            Texture texture= manager.get(ingredientes.get(ingrediente.getIdIngrediente()).get(id));
             ingrediente.setIngredienteTexture(texture);
+
+            ingrediente.setEstado(this.getId());
+            preparacion.add(ingrediente.getIdIngrediente()+","+ingrediente.getEstado()+","+this.getId());
         }
 
     }
 
-    public static class AgregarListenerUtencilio extends InputListener {
-        float altura = 75 / 2;
-        float touchDown_x;
-        float touchDown_y;
-        float dx;
-        float dy;
-        Ingrediente ingrediente;
-        Utencilio utencilio;
-        public AgregarListenerUtencilio (Ingrediente ingredienteActual, Utencilio utencilio){
-            ingrediente=ingredienteActual ;
-            this.utencilio = utencilio;
-        }
-
-
-
-        /**
-         * Verificar colisión entre ingrediente y lugar de preparación
-         *  En caso de que halla colisión entre las coordenadas (x y) del evento y lugar de platillo el ingrediente ya no será visible y su estado true
-         *  En caso de que halla colisión entre las coordenadas (x y) del evento y lugar de platillo el ingrediente será visible y su estado false
-         */
-        public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-            if ((ingrediente.getX() >= utencilio.getX() && ingrediente.getX() <= (utencilio.getX() + utencilio.getWidth())) && (ingrediente.getY() >= utencilio.getY() && ingrediente.getY() <= (utencilio.getY() + utencilio.getHeight()))) {
-                ingrediente.setVisible(false);
-                ingrediente.setestadoIngrediente(true);
-            } else {
-                ingrediente.setPosition(ingrediente.getPosicionInicialX(), ingrediente.getPosicionInicialY());
-            }
-
-        }
+    public void preparar(List<String> preparacion, Ingrediente ingredienteActual, Ingrediente ingrediente1) {
+        ingredienteActual.setVisible(false);
+        ingredienteActual.setPosition(ingredienteActual.getX(),ingredienteActual.getY());
+        List<List<String>> ingredientes= constantes.getIngredientesImagenes();
+        Texture texture= manager.get(ingredientes.get(9).get(0));
+        ingrediente1.setIngredienteTexture(texture);
+        ingrediente1.setIdIngrediente(9);
+        ingrediente1.setEstado(0);
+        preparacion.add(ingredienteActual.getIdIngrediente()+","+ingredienteActual.getEstado()+","+this.getId());
     }
+
+
 }

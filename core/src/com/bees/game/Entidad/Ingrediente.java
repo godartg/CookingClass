@@ -21,7 +21,16 @@ import java.util.List;
 public class Ingrediente extends Actor{
     private int id;
     private String nombreIngrediente;
-    private boolean estadoIngrediente;
+    private int estado;
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estadoIngrediente) {
+        this.estado = estadoIngrediente;
+    }
+
     private Texture ingredienteTexture;
     private float posicionInicialX, posicionInicialY;
 
@@ -41,20 +50,12 @@ public class Ingrediente extends Actor{
         this.posicionInicialY = posicionInicialY;
     }
 
-    public boolean getestadoIngrediente() {
-        return estadoIngrediente;
-    }
-
-    public void setestadoIngrediente(boolean estadoIngrediente) {
-        this.estadoIngrediente = estadoIngrediente;
-    }
-
-    public int getidIngrediente() {
+      public int getIdIngrediente() {
         return id;
     }
 
 
-    public void setidIngrediente(int idIngrediente) {
+    public void setIdIngrediente(int idIngrediente) {
         this.id = idIngrediente;
     }
 
@@ -88,11 +89,12 @@ public class Ingrediente extends Actor{
         setBounds(x, y,75,75);
 
     }
-    public Ingrediente( int idIngrediente,Texture texture, float x, float y){
+    public Ingrediente( int idIngrediente, int estado,Texture texture, float x, float y){
         this.id= idIngrediente;
         this.ingredienteTexture = texture;
         posicionInicialX= x;
         posicionInicialY = y;
+        this.estado= estado;
         setBounds(x, y,75,75);
 
     }
@@ -111,12 +113,18 @@ public class Ingrediente extends Actor{
         float touchDown_y;
         float dx;
         float dy;
-        Ingrediente ingrediente;
+        Ingrediente ingredienteActual, ingrediente1, ingrediente2, ingrediente3;
         Utencilio utencilio;
+        List<String> preparacionActual= new ArrayList<String>();
 
-        public AgregarListener(Ingrediente ingredienteActual, Utencilio utencilio){
-            ingrediente=ingredienteActual ;
+
+        public AgregarListener(List<String> preparacionActual, Ingrediente ingrediente,Ingrediente ingrediente1,Ingrediente ingrediente2,Ingrediente ingrediente3, Utencilio utencilio){
+            ingredienteActual= ingrediente;
+            this.ingrediente1= ingrediente1;
+            this.ingrediente2= ingrediente2;
+            this.ingrediente3= ingrediente3;
             this.utencilio = utencilio;
+            this.preparacionActual= preparacionActual;
         }
 
          public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -128,9 +136,9 @@ public class Ingrediente extends Actor{
 
         public void touchDragged(InputEvent event, float x, float y, int pointer) {
             //Mover el objeto
-            dx = ingrediente.getX() - touchDown_x;
-            dy = ingrediente.getY() - altura  + touchDown_y;
-            ingrediente.setPosition(x + dx, y + dy);
+            dx = ingredienteActual.getX() - touchDown_x;
+            dy = ingredienteActual.getY() - altura  + touchDown_y;
+            ingredienteActual.setPosition(x + dx, y + dy);
         }
 
         /**
@@ -139,14 +147,20 @@ public class Ingrediente extends Actor{
          *  En caso de que halla colisión entre las coordenadas (x y) del evento y lugar de platillo el ingrediente será visible y su estado false
          */
         public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-            if ((ingrediente.getX() >= utencilio.getX() && ingrediente.getX() <= (utencilio.getX() + utencilio.getWidth())) && (ingrediente.getY() >= utencilio.getY() && ingrediente.getY() <= (utencilio.getY() + utencilio.getHeight()))) {
-                //ingrediente.setVisible(false);
-                //ingrediente.setestadoIngrediente(true);
+            if ((ingredienteActual.getX() >= utencilio.getX() && ingredienteActual.getX() <= (utencilio.getX() + utencilio.getWidth())) && (ingredienteActual.getY() >= utencilio.getY() && ingredienteActual.getY() <= (utencilio.getY() + utencilio.getHeight()))) {
 
-                utencilio.preparar(ingrediente);
+                if((ingredienteActual.getX() >= ingrediente1.getX() && ingredienteActual.getX() <= (ingrediente1.getX() + ingrediente1.getWidth())) && (ingredienteActual.getY() >= ingrediente1.getY() && ingredienteActual.getY() <= (ingrediente1.getY() + ingrediente1.getHeight()))){
+                    utencilio.preparar(preparacionActual, ingredienteActual, ingrediente1);
+                }else if((ingredienteActual.getX() >= ingrediente2.getX() && ingredienteActual.getX() <= (ingrediente2.getX() + ingrediente2.getWidth())) && (ingredienteActual.getY() >= ingrediente2.getY() && ingredienteActual.getY() <= (ingrediente2.getY() + ingrediente2.getHeight()))){
+                    utencilio.preparar(preparacionActual, ingredienteActual, ingrediente2);
+                }else if((ingredienteActual.getX() >= ingrediente3.getX() && ingredienteActual.getX() <= (ingrediente3.getX() + ingrediente3.getWidth())) && (ingredienteActual.getY() >= ingrediente3.getY() && ingredienteActual.getY() <= (ingrediente3.getY() + ingrediente3.getHeight()))){
+                    utencilio.preparar(preparacionActual, ingredienteActual, ingrediente3);
+                }else{
 
+                    utencilio.preparar(preparacionActual, ingredienteActual);
+                }
             } else {
-                ingrediente.setPosition(ingrediente.posicionInicialX, ingrediente.posicionInicialY);
+                ingredienteActual.setPosition(ingredienteActual.posicionInicialX, ingredienteActual.posicionInicialY);
             }
 
         }

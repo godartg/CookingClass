@@ -33,6 +33,7 @@ import java.util.ListIterator;
 public class GameScreen extends BaseScreen{
     private AnnotationAssetManager manager;
     private Label lblTitulo, lblLugarPrep;
+    int idPlatillo;
     private Skin skin;
     private Image imagenFondo;
     ImageButton btnizquierda, btnderecha;
@@ -44,6 +45,7 @@ public class GameScreen extends BaseScreen{
     ListIterator<String> llugar;
     ListIterator<Texture> lpath;
     Constantes constantes;
+    List<String> preparacion= new ArrayList<String>();
     /**
     List<Ingrediente> ingredientes;
     List<String> nombreUtencilios;
@@ -63,6 +65,7 @@ public class GameScreen extends BaseScreen{
         manager= new AnnotationAssetManager();
 
         loadAssets(platilloNumero);
+        this.idPlatillo= platilloNumero;
         entityFactory= new EntityFactory(manager);
         //ingredientes= getIngredientes(platilloNumero);
         lugarArray.add("Olla");
@@ -170,22 +173,19 @@ public class GameScreen extends BaseScreen{
         utencilio = new Utencilio(manager,0,lugarTexture,370,50);
         addActor(utencilio);
         Texture lecheTexture=manager.get(GameAssetsPlatillo0.LECHE);
-        leche = new Ingrediente(1,lecheTexture,posicionesCocina.get(0).get(0),posicionesCocina.get(0).get(1));
+        leche = new Ingrediente(1,0,lecheTexture,posicionesCocina.get(0).get(0),posicionesCocina.get(0).get(1));
         Texture papaTexture=manager.get(GameAssetsPlatillo0.PAPA);
-        papa = new Ingrediente( 0,papaTexture,posicionesCocina.get(1).get(0),posicionesCocina.get(1).get(1));
+        papa = new Ingrediente( 0,0,papaTexture,posicionesCocina.get(1).get(0),posicionesCocina.get(1).get(1));
         Texture mantequillaTexture=manager.get(GameAssetsPlatillo0.MANTEQUILLA);
-        mantequilla = new Ingrediente(2,mantequillaTexture,posicionesCocina.get(2).get(0),posicionesCocina.get(2).get(1));
+        mantequilla = new Ingrediente(2,0,mantequillaTexture,posicionesCocina.get(2).get(0),posicionesCocina.get(2).get(1));
         Texture salTexture=manager.get(GameAssetsPlatillo0.SAL);
-        sal = new Ingrediente(3,salTexture,posicionesCocina.get(3).get(0),posicionesCocina.get(3).get(1));
-        leche.setestadoIngrediente(false);
-        papa.setestadoIngrediente(false);
-        mantequilla.setestadoIngrediente(false);
-        sal.setestadoIngrediente(false);
+        sal = new Ingrediente(3,0,salTexture,posicionesCocina.get(3).get(0),posicionesCocina.get(3).get(1));
 
-        leche.addListener(new Ingrediente.AgregarListener(leche, utencilio));
-        papa.addListener(new Ingrediente.AgregarListener(papa, utencilio));
-        mantequilla.addListener(new Ingrediente.AgregarListener(mantequilla, utencilio));
-        sal.addListener(new Ingrediente.AgregarListener(sal, utencilio));
+
+        leche.addListener(new Ingrediente.AgregarListener(this.preparacion, leche,papa,mantequilla, sal, utencilio));
+        papa.addListener(new Ingrediente.AgregarListener(this.preparacion,papa,leche,mantequilla, sal, utencilio));
+        mantequilla.addListener(new Ingrediente.AgregarListener(this.preparacion,mantequilla,papa,leche, sal, utencilio));
+        sal.addListener(new Ingrediente.AgregarListener(this.preparacion,sal,papa,mantequilla, leche, utencilio));
 
         addActor(leche);
         addActor(papa);
@@ -207,7 +207,7 @@ public class GameScreen extends BaseScreen{
         btnCocinar= new TextButton("Cocinar", style_btn);
         btnCocinar.setSize(120,60);
         btnCocinar.setPosition(280,30);
-        btnCocinar.addCaptureListener(new Evaluacion.EvaluarListener(leche,mantequilla,papa,sal));
+        btnCocinar.addCaptureListener(new Evaluacion.EvaluarListener(idPlatillo, preparacion));
 
         addActor(lblTitulo);
         addActor(lblLugarPrep);

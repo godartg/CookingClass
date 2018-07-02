@@ -45,7 +45,7 @@ public final class Constantes {
         get(1).add(SelectionLevelAssets.PAPA_A_LA_HUANCAINA);
 
     }};
-    private static final List<List<String>> Preparaciones= new ArrayList<List<String>>(){{
+    private static final List<List<String>> PREPARACIONES= new ArrayList<List<String>>(){{
         add(new ArrayList<String>());
         add(new ArrayList<String>());
         //ingrediente de platillo 0
@@ -230,6 +230,10 @@ public final class Constantes {
     }} ;
     public Constantes(){
 
+    }
+    public List<String> getPreparacionPlatillo(int idPlatillo){
+        List<String> preparacion= PREPARACIONES.get(idPlatillo);
+        return preparacion;
     }
     public List<String> getUtenciliosNombre() {
         List<String> listaUtencilios= new ArrayList<String>();

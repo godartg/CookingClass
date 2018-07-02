@@ -33,9 +33,18 @@ public class Evaluacion {
      * @param preparacion
      * @return
      */
-    public double evaluarPartida(int numeroPlatillo, List<List<String>> preparacion){
+    public double evaluarPartida(int numeroPlatillo, List<String> preparacion){
+        Constantes constantes= new Constantes();
+        List<String> preparacionCorrecta= constantes.getPreparacionPlatillo(numeroPlatillo);
         double resultado=0;
-
+        double punto=100/preparacionCorrecta.size();
+        for(int i=0; i< preparacionCorrecta.size();i++){
+            for(int j=0; j< preparacion.size(); j++){
+                if(preparacion.get(j).equals(preparacionCorrecta.get(i))){
+                    resultado= punto;
+                }
+            }
+        }
         return resultado;
     }
 
@@ -49,34 +58,22 @@ public class Evaluacion {
     }
 
     public static class EvaluarListener extends ChangeListener {
-        Ingrediente leche, mantequilla, papa, sal;
-        double porcentajeDeExito;
+        List<String> preparacionActual;
+        int idPlatillo;
         /**
          * Permite realizar el calculo del puntaje
          * Permite ingresar ingredientes
          */
-        public EvaluarListener(Ingrediente ingredienteLeche, Ingrediente ingredienteMantequilla, Ingrediente ingredientePapa, Ingrediente ingredienteSal) {
-            leche = ingredienteLeche;
-            mantequilla = ingredienteMantequilla;
-            papa = ingredientePapa;
-            sal = ingredienteSal;
+        public EvaluarListener(final int idPlatillo ,final List<String> preparacion) {
+            this.preparacionActual= preparacion;
+            this.idPlatillo= idPlatillo;
         }
 
         @Override
         public void changed(ChangeEvent event, Actor actor) {
-            int puntaje=0;
-            if(leche.getestadoIngrediente()){
-                puntaje+=5;
-            }
-            if (mantequilla.getestadoIngrediente()){
-                puntaje+=5;
-            }
-            if (papa.getestadoIngrediente()){
-                puntaje+=5;
-            }
-            if (sal.getestadoIngrediente()){
-                puntaje+=5;
-            }
+            double puntaje=0;
+            Evaluacion evaluacion= new Evaluacion();
+            puntaje=evaluacion.evaluarPartida(idPlatillo, preparacionActual);
             ScreenManager.getInstance().showScreen(ScreenEnum.SCORE_SCREEN,puntaje);
         }
     }
