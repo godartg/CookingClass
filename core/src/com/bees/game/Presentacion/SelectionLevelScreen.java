@@ -30,7 +30,7 @@ import java.util.List;
 public class SelectionLevelScreen extends BaseScreen{
     private Image imagenFondo;
     private ImageButton botonPlatillo0, botonPlatillo1;
-    private List<String> platillosImagenes= new ArrayList<String>();
+    private List<Object> platillosImagenes= new ArrayList<Object>();
     AnnotationAssetManager manager;
 
     public SelectionLevelScreen() {

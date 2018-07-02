@@ -5,13 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ArraySelection;
-import com.bees.game.utils.Constantes;
-
-import net.dermetfan.gdx.assets.AnnotationAssetManager;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -23,23 +16,6 @@ public class Ingrediente extends Actor{
     private String nombreIngrediente;
     private boolean estadoIngrediente;
     private Texture ingredienteTexture;
-    private float posicionInicialX, posicionInicialY;
-
-    public float getPosicionInicialX() {
-        return posicionInicialX;
-    }
-
-    public void setPosicionInicialX(float posicionInicialX) {
-        this.posicionInicialX = posicionInicialX;
-    }
-
-    public float getPosicionInicialY() {
-        return posicionInicialY;
-    }
-
-    public void setPosicionInicialY(float posicionInicialY) {
-        this.posicionInicialY = posicionInicialY;
-    }
 
     public boolean getestadoIngrediente() {
         return estadoIngrediente;
@@ -78,22 +54,13 @@ public class Ingrediente extends Actor{
         this.ingredienteTexture = texture;
         this.id= idIngrediente;
     }
-    public Ingrediente(){
 
-    }
     public Ingrediente(Texture texture, float x, float y){
         this.ingredienteTexture = texture;
-        posicionInicialX= x;
-        posicionInicialY = y;
         setBounds(x, y,75,75);
 
     }
-    public Ingrediente( int idIngrediente,Texture texture, float x, float y){
-        this.id= idIngrediente;
-        this.ingredienteTexture = texture;
-        posicionInicialX= x;
-        posicionInicialY = y;
-        setBounds(x, y,75,75);
+    public Ingrediente(){
 
     }
 
@@ -113,7 +80,6 @@ public class Ingrediente extends Actor{
         float dy;
         Ingrediente ingrediente;
         Utencilio utencilio;
-
         public AgregarListener(Ingrediente ingredienteActual, Utencilio utencilio){
             ingrediente=ingredienteActual ;
             this.utencilio = utencilio;
@@ -140,13 +106,10 @@ public class Ingrediente extends Actor{
          */
         public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
             if ((ingrediente.getX() >= utencilio.getX() && ingrediente.getX() <= (utencilio.getX() + utencilio.getWidth())) && (ingrediente.getY() >= utencilio.getY() && ingrediente.getY() <= (utencilio.getY() + utencilio.getHeight()))) {
-                //ingrediente.setVisible(false);
-                //ingrediente.setestadoIngrediente(true);
-
-                utencilio.preparar(ingrediente);
-
+                ingrediente.setVisible(false);
+                ingrediente.setestadoIngrediente(true);
             } else {
-                ingrediente.setPosition(ingrediente.posicionInicialX, ingrediente.posicionInicialY);
+                ingrediente.setPosition(30, 230);
             }
 
         }
