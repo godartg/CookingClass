@@ -45,7 +45,7 @@ public enum ScreenEnum {
     },
     SCORE_SCREEN{
         public BaseScreen getScreen(Object... params){
-            return new ScoreScreen((Integer) params[0]);
+            return new ScoreScreen((Double) params[0]);
         }
     };
 

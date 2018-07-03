@@ -3,6 +3,7 @@ package com.bees.game.entidad;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.bees.game.utils.Constantes;
 import com.bees.game.utils.ScreenEnum;
 import com.bees.game.utils.ScreenManager;
 
@@ -41,7 +42,7 @@ public class Evaluacion {
         for(int i=0; i< preparacionCorrecta.size();i++){
             for(int j=0; j< preparacion.size(); j++){
                 if(preparacion.get(j).equals(preparacionCorrecta.get(i))){
-                    resultado= punto;
+                    resultado+= punto;
                 }
             }
         }

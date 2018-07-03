@@ -28,7 +28,7 @@ public class ScoreScreen extends BaseScreen{
     TextButton btnRegresarMenu;
     Texture fondoPantalla;
     AnnotationAssetManager manager;
-    public ScoreScreen(int score) {
+    public ScoreScreen(double score) {
         super();
         manager= new AnnotationAssetManager();
         loadAssets();
@@ -36,9 +36,9 @@ public class ScoreScreen extends BaseScreen{
         fondo_pantalla= new Image(fondoPantalla);
         fondo_pantalla.setSize(640, 360);
         fondo_pantalla.setPosition(0, 0);
-        skin = new Skin(Gdx.files.internal("orange/skin/uiskin.json"));
-        Label.LabelStyle stle_label= skin.get("title",Label.LabelStyle.class);
-        lblScore = new Label(""+score, stle_label);
+        skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+        Label.LabelStyle stle_label= skin.get(Label.LabelStyle.class);
+        lblScore = new Label(score+"/100", stle_label);
         lbltitulo = new Label( "Felicidades por tu score ", stle_label);
     }
 
@@ -50,9 +50,9 @@ public class ScoreScreen extends BaseScreen{
     @Override
     public void buildStage() {
 
-        lblScore.setSize(90,60);
+        lblScore.setSize(110,65);
         lblScore.setPosition(300,119);
-        lbltitulo.setSize(90,60);
+        lbltitulo.setSize(110,65);
         lbltitulo.setPosition(225, 180);
         TextButton.TextButtonStyle style_btn= skin.get(TextButton.TextButtonStyle.class);
         btnRegresarMenu= new TextButton("Regresar", style_btn);
